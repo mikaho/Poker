@@ -55,5 +55,20 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNull(flush.IsMatch(cards));
 		}
+
+		[TestMethod]
+		public void HandFlushTestDuplicate()
+		{
+			//Arrange
+			List<Card> cards = new List<Card>();
+			cards.Add(new Card(Suits.Clubes, "A"));
+			cards.Add(new Card(Suits.Clubes, "A"));
+
+			//Act
+			Flush hand = new Flush();
+
+			//Assert
+			Assert.ThrowsException<InvalidOperationException>(() => hand.IsMatch(cards));
+		}
 	}
 }

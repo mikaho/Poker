@@ -146,5 +146,20 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNull(straightFlush.IsMatch(cards));
 		}
+
+		[TestMethod]
+		public void HandStraightFlushTestDuplicate()
+		{
+			//Arrange
+			List<Card> cards = new List<Card>();
+			cards.Add(new Card(Suits.Clubes, "A"));
+			cards.Add(new Card(Suits.Clubes, "A"));
+
+			//Act
+			StraightFlush hand = new StraightFlush();
+
+			//Assert
+			Assert.ThrowsException<InvalidOperationException>(() => hand.IsMatch(cards));
+		}
 	}
 }

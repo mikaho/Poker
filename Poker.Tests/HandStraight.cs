@@ -102,5 +102,20 @@ namespace Poker.Tests
 			Assert.AreEqual(6, straight.CardsInTheHand[0].Value);
 			Assert.AreEqual(2, straight.CardsInTheHand[4].Value);
 		}
+
+		[TestMethod]
+		public void HandStraightTestDuplicate()
+		{
+			//Arrange
+			List<Card> cards = new List<Card>();
+			cards.Add(new Card(Suits.Clubes, "A"));
+			cards.Add(new Card(Suits.Clubes, "A"));
+
+			//Act
+			Straight straight = new Straight();
+
+			//Assert
+			Assert.ThrowsException<InvalidOperationException>(() => straight.IsMatch(cards));
+		}
 	}
 }

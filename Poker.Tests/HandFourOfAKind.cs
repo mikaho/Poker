@@ -53,5 +53,20 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNull(fourOfAKind.IsMatch(cards));
 		}
+
+		[TestMethod]
+		public void HandFourOfAKindTestDuplicate()
+		{
+			//Arrange
+			List<Card> cards = new List<Card>();
+			cards.Add(new Card(Suits.Clubes, "A"));
+			cards.Add(new Card(Suits.Clubes, "A"));
+
+			//Act
+			FourOfAKind hand = new FourOfAKind();
+
+			//Assert
+			Assert.ThrowsException<InvalidOperationException>(() => hand.IsMatch(cards));
+		}
 	}
 }
