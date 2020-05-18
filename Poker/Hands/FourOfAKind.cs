@@ -15,6 +15,8 @@ namespace Poker.Hands
 
 		public override Hand IsMatch(IEnumerable<Card> cards)
 		{
+			ThrowIfDuplicate(cards);
+
 			if (cards.Count() < 5)
 				return Next(cards);
 

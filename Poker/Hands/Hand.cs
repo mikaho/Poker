@@ -28,6 +28,15 @@ namespace Poker.Hands
 			cardsInHand.AddRange(handCards);
 		}
 
+		protected void ThrowIfDuplicate(IEnumerable<Card> cards)
+		{
+			var duplicates = cards.GroupBy(s => new { s.Suit, s.Value })
+				.SelectMany(grp => grp.Skip(1));
+
+			if (duplicates.Any())
+				throw new InvalidOperationException();
+		}
+
 		protected Hand Next(IEnumerable<Card> cards)
 		{
 			if (next == null)

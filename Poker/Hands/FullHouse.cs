@@ -15,6 +15,8 @@ namespace Poker.Hands
 
 		public override Hand IsMatch(IEnumerable<Card> cards)
 		{
+			ThrowIfDuplicate(cards);
+
 			if (cards.Count() < 5)
 				return Next(cards);
 
@@ -32,7 +34,7 @@ namespace Poker.Hands
 				.FindAll(c => c.Value != treeOfAKind.First().Value);
 
 			List<Card> pair = remainingCard.GroupBy(s => s.Value)
-				.Where(g => g.Count() >= 2)
+				.Where(g => g.Count() == 2)
 				.SelectMany(grp => grp)
 				.OrderByDescending(c => c.Value)
 				.Take(2)

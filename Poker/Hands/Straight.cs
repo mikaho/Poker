@@ -6,10 +6,10 @@ using System.Text;
 
 namespace Poker.Hands
 {
-	public class StraightFlush : Hand
+	public class Straight : Hand
 	{
-		public StraightFlush(Hand next = null)
-			: base(Constancts.HandRanks.StraightFlush, next)
+		public Straight(Hand next = null)
+			: base(Constancts.HandRanks.Straight, next)
 		{
 		}
 
@@ -21,20 +21,27 @@ namespace Poker.Hands
 			if (cards.Count() < 5)
 				return Next(cards);
 
-			List<Card> cardsInSuit = cards.GroupBy(s => s.Suit)
-				.Where(g => g.Count() >= 5)
+			List<Card> pairs = cards.GroupBy(s => s.Value)
+				.Where(g => g.Count() == 2)
 				.SelectMany(grp => grp)
+				.OrderBy(c => c.Value)
+				.ToList();
+
+			List<Card> pairsRemoved = new List<Card>(cards);
+			if (pairs.Count >= 2)
+				pairsRemoved.Remove(pairs.Take(1).First());
+			if (pairs.Count >= 4)
+				pairsRemoved.Remove(pairs.Skip(2).Take(1).First());
+
+			List<Card> cardsInStraight = pairsRemoved
 				.OrderByDescending(c => c.Value)
 				.ToList();
 
-			if (cardsInSuit.Count < 5)
+			List<Card> straight = ResolveStraight(cardsInStraight);
+			if (straight.Count != 5)
 				return Next(cards);
 
-			List<Card> straightFlushCards = ResolveStraight(cardsInSuit);
-			if (straightFlushCards.Count != 5)
-				return Next(cards);
-
-			SetHandCards(straightFlushCards);
+			SetHandCards(straight);
 
 			return this;
 		}
