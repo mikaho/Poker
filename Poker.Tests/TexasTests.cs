@@ -9,6 +9,7 @@ using System.Text;
 namespace Poker.Tests
 {
 	[TestClass]
+	[TestCategory("Texas")]
 	public class TexasTests
 	{
 		[TestMethod]

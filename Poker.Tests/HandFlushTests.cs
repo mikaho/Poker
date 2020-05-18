@@ -8,6 +8,7 @@ using System.Text;
 namespace Poker.Tests
 {
 	[TestClass]
+	[TestCategory("Hand")]
 	public class HandFlushTests
 	{
 		[TestMethod]
@@ -24,10 +25,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, "Q"));
 
 			//Act
-			Flush flush = new Flush(cards);
+			Flush flush = new Flush();
 
 			//Assert
-			Assert.IsTrue(flush.IsMatch());
+			Assert.IsNotNull(flush.IsMatch(cards));
 			Assert.AreEqual(5, flush.CardsInTheHand.Count);
 			Assert.AreEqual(12, flush.CardsInTheHand[0].Value);
 			Assert.AreEqual(5, flush.CardsInTheHand[4].Value);
@@ -49,10 +50,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Dimensions, 7));
 
 			//Act
-			Flush flush = new Flush(cards);
+			Flush flush = new Flush();
 
 			//Assert
-			Assert.IsFalse(flush.IsMatch());
+			Assert.IsNull(flush.IsMatch(cards));
 		}
 	}
 }

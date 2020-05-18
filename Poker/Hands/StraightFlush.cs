@@ -8,37 +8,33 @@ namespace Poker.Hands
 {
 	public class StraightFlush : Hand
 	{
-		public StraightFlush(IEnumerable<Card> cards)
-			: this(cards, null)
+		public StraightFlush(Hand next = null)
+			: base(Constancts.HandRanks.StraightFlush, next)
 		{
 		}
 
-		public StraightFlush(IEnumerable<Card> cards, Hand next)
-			: base(Constancts.HandRanks.StraightFlush, cards, next)
-		{
-		}
 
-		public override bool IsMatch()
+		public override Hand IsMatch(IEnumerable<Card> cards)
 		{
-			if (Cards.Count < 5)
-				return Next();
+			if (cards.Count() < 5)
+				return Next(cards);
 
-			List<Card> cardsInSuit = Cards.GroupBy(s => s.Suit)
+			List<Card> cardsInSuit = cards.GroupBy(s => s.Suit)
 				.Where(g => g.Count() >= 5)
 				.SelectMany(grp => grp)
 				.OrderByDescending(c => c.Value)
 				.ToList();
 
 			if (cardsInSuit.Count < 5)
-				return Next();
+				return Next(cards);
 
 			List<Card> straightFlushCards = ResolveStraight(cardsInSuit);
 			if (straightFlushCards.Count != 5)
-				return Next();
+				return Next(cards);
 
 			SetHandCards(straightFlushCards);
 
-			return true;
+			return this;
 		}
 
 		private static List<Card> ResolveStraight(List<Card> cardsInSuit)

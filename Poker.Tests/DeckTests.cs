@@ -6,6 +6,7 @@ using System.Linq;
 namespace Poker.Tests
 {
 	[TestClass]
+	[TestCategory("Deck")]
 	public class DeckTests
 	{
 		[TestMethod]

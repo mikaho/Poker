@@ -8,40 +8,32 @@ namespace Poker.Hands
 {
 	public abstract class Hand
 	{
-		private readonly IEnumerable<Card> cards;
 		private readonly Hand next;
 
-		public IReadOnlyList<Card> Cards => cards.ToList().AsReadOnly();
 		private List<Card> cardsInHand = new List<Card>();
 		public IReadOnlyList<Card> CardsInTheHand => cardsInHand.ToList().AsReadOnly();
-		public Hand(int rank, IEnumerable<Card> cards, Hand next)
+		public Hand(int rank, Hand next)
 		{
-			var duplicates = cards.GroupBy(s => new { s.Suit, s.Value})
-				.SelectMany(grp => grp.Skip(1));
-
-			if (duplicates.Any())
-				throw new InvalidOperationException();
-			
 			Rank = rank;
-			this.cards = cards;
 			this.next = next;
 		}
 
 		public int Rank { get; }
 
-		public abstract bool IsMatch();
+		public abstract Hand IsMatch(IEnumerable<Card> cards);
+
 		protected void SetHandCards(IEnumerable<Card> handCards)
 		{
 			cardsInHand.Clear();
 			cardsInHand.AddRange(handCards);
 		}
 
-		protected bool Next()
+		protected Hand Next(IEnumerable<Card> cards)
 		{
 			if (next == null)
-				return false;
+				return null;
 
-			return next.Next();
+			return next.IsMatch(cards);
 		}
 	}
 }

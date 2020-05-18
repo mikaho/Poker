@@ -8,22 +8,17 @@ namespace Poker.Hands
 {
 	public class FourOfAKind : Hand
 	{
-		public FourOfAKind(IEnumerable<Card> cards)
-			: this(cards, null)
+		public FourOfAKind(Hand next = null)
+			: base(Constancts.HandRanks.FourOfAKind, next)
 		{
 		}
 
-		public FourOfAKind(IEnumerable<Card> cards, Hand next)
-			: base(Constancts.HandRanks.FourOfAKind, cards, next)
+		public override Hand IsMatch(IEnumerable<Card> cards)
 		{
-		}
+			if (cards.Count() < 5)
+				return Next(cards);
 
-		public override bool IsMatch()
-		{
-			if (Cards.Count < 5)
-				return Next();
-
-			List<Card> fourOfAKind = Cards.GroupBy(s => s.Value)
+			List<Card> fourOfAKind = cards.GroupBy(s => s.Value)
 				.Where(g => g.Count() >= 4)
 				.SelectMany(grp => grp)
 				.OrderByDescending(c => c.Value)
@@ -31,18 +26,18 @@ namespace Poker.Hands
 				.ToList();
 
 			if (fourOfAKind.Count != 4)
-				return Next();
+				return Next(cards);
 
-			Card highCard = Cards.ToList()
+			Card highCard = cards.ToList()
 				.FindAll(c => c.Value != fourOfAKind.First().Value)
 				.OrderByDescending(c => c.Value)
 				.First();
 
-			List<Card> cards = new List<Card>(fourOfAKind);
-			cards.Add(highCard);
-			SetHandCards(cards);
+			List<Card> finalCards = new List<Card>(fourOfAKind);
+			finalCards.Add(highCard);
+			SetHandCards(finalCards);
 
-			return true;
+			return this;
 		}
 	}
 }

@@ -8,22 +8,18 @@ namespace Poker.Hands
 {
 	public class Flush : Hand
 	{
-		public Flush(IEnumerable<Card> cards)
-		: this(cards, null)
+
+		public Flush(Hand next = null)
+			: base(Constancts.HandRanks.Flush, next)
 		{
 		}
 
-		public Flush(IEnumerable<Card> cards, Hand next)
-			: base(Constancts.HandRanks.Flush, cards, next)
+		public override Hand IsMatch(IEnumerable<Card> cards)
 		{
-		}
+			if (cards.Count() < 5)
+				return Next(cards);
 
-		public override bool IsMatch()
-		{
-			if (Cards.Count < 5)
-				return Next();
-
-			List<Card> cardsInSuit = Cards.GroupBy(s => s.Suit)
+			List<Card> cardsInSuit = cards.GroupBy(s => s.Suit)
 				.Where(g => g.Count() >= 5)
 				.SelectMany(grp => grp)
 				.OrderByDescending(c => c.Value)
@@ -31,11 +27,11 @@ namespace Poker.Hands
 				.ToList();
 
 			if (cardsInSuit.Count != 5)
-				return Next();
+				return Next(cards);
 
 			SetHandCards(cardsInSuit);
 
-			return true;
+			return this;
 		}
 
 	}

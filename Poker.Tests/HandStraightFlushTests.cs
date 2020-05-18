@@ -8,6 +8,7 @@ using System.Text;
 namespace Poker.Tests
 {
 	[TestClass]
+	[TestCategory("Hand")]
 	public class HandStraightFlushTests
 	{
 		[TestMethod]
@@ -24,10 +25,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, "J"));
 
 			//Act
-			StraightFlush straightFlush = new StraightFlush(cards);
+			StraightFlush straightFlush = new StraightFlush();
 
 			//Assert
-			Assert.IsTrue(straightFlush.IsMatch());
+			Assert.IsNotNull(straightFlush.IsMatch(cards));
 			Assert.AreEqual(5, straightFlush.CardsInTheHand.Count);
 		}
 
@@ -46,10 +47,10 @@ namespace Poker.Tests
 
 			
 			//Act
-			StraightFlush straightFlush = new StraightFlush(cards);
+			StraightFlush straightFlush = new StraightFlush();
 
 			//Assert
-			Assert.IsTrue(straightFlush.IsMatch());
+			Assert.IsNotNull(straightFlush.IsMatch(cards));
 			Assert.AreEqual(5, straightFlush.CardsInTheHand.Count);
 			Assert.AreEqual(5, straightFlush.CardsInTheHand[0].Value);
 			Assert.AreEqual(14, straightFlush.CardsInTheHand[4].Value);
@@ -69,10 +70,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, 6));
 
 			//Act
-			StraightFlush straightFlush = new StraightFlush(cards);
+			StraightFlush straightFlush = new StraightFlush();
 
 			//Assert
-			Assert.IsTrue(straightFlush.IsMatch());
+			Assert.IsNotNull(straightFlush.IsMatch(cards));
 			Assert.AreEqual(5, straightFlush.CardsInTheHand.Count);
 			Assert.AreEqual(6, straightFlush.CardsInTheHand[0].Value);
 			Assert.AreEqual(2, straightFlush.CardsInTheHand[4].Value);
@@ -92,10 +93,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Clubes, 7));
 
 			//Act
-			StraightFlush straightFlush = new StraightFlush(cards);
+			StraightFlush straightFlush = new StraightFlush();
 
 			//Assert
-			Assert.IsTrue(straightFlush.IsMatch());
+			Assert.IsNotNull(straightFlush.IsMatch(cards));
 			Assert.AreEqual(5, straightFlush.CardsInTheHand.Count);
 			Assert.AreEqual(11, straightFlush.CardsInTheHand[0].Value);
 			Assert.AreEqual(7, straightFlush.CardsInTheHand[4].Value);
@@ -116,10 +117,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Clubes, 7));
 
 			//Act
-			StraightFlush straightFlush = new StraightFlush(cards);
+			StraightFlush straightFlush = new StraightFlush();
 
 			//Assert
-			Assert.IsTrue(straightFlush.IsMatch());
+			Assert.IsNotNull(straightFlush.IsMatch(cards));
 			Assert.AreEqual(5, straightFlush.CardsInTheHand.Count);
 			Assert.AreEqual(9, straightFlush.CardsInTheHand[0].Value);
 			Assert.AreEqual(5, straightFlush.CardsInTheHand[4].Value);
@@ -140,10 +141,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Clubes, 7));
 
 			//Act
-			StraightFlush straightFlush = new StraightFlush(cards);
+			StraightFlush straightFlush = new StraightFlush();
 
 			//Assert
-			Assert.IsFalse(straightFlush.IsMatch());
+			Assert.IsNull(straightFlush.IsMatch(cards));
 		}
 	}
 }

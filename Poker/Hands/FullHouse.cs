@@ -8,22 +8,17 @@ namespace Poker.Hands
 {
 	public class FullHouse : Hand
 	{
-		public FullHouse(IEnumerable<Card> cards)
-			: this(cards, null)
+		public FullHouse(Hand next = null)
+			: base(Constancts.HandRanks.FullHouse, next)
 		{
 		}
 
-		public FullHouse(IEnumerable<Card> cards, Hand next)
-			: base(Constancts.HandRanks.FullHouse, cards, next)
+		public override Hand IsMatch(IEnumerable<Card> cards)
 		{
-		}
+			if (cards.Count() < 5)
+				return Next(cards);
 
-		public override bool IsMatch()
-		{
-			if (Cards.Count < 5)
-				return Next();
-
-			List<Card> treeOfAKind = Cards.GroupBy(s => s.Value)
+			List<Card> treeOfAKind = cards.GroupBy(s => s.Value)
 				.Where(g => g.Count() >= 3)
 				.SelectMany(grp => grp)
 				.OrderByDescending(c => c.Value)
@@ -31,9 +26,9 @@ namespace Poker.Hands
 				.ToList();
 
 			if (treeOfAKind.Count != 3)
-				return Next();
+				return Next(cards);
 
-			List<Card> remainingCard = Cards.ToList()
+			List<Card> remainingCard = cards.ToList()
 				.FindAll(c => c.Value != treeOfAKind.First().Value);
 
 			List<Card> pair = remainingCard.GroupBy(s => s.Value)
@@ -44,14 +39,14 @@ namespace Poker.Hands
 				.ToList();
 
 			if (pair.Count != 2)
-				return Next();
+				return Next(cards);
 
-			List<Card> cards = new List<Card>(treeOfAKind);
-			cards.AddRange(pair);
+			List<Card> finalCards = new List<Card>(treeOfAKind);
+			finalCards.AddRange(pair);
 
-			SetHandCards(cards);
+			SetHandCards(finalCards);
 
-			return true;
+			return this;
 		}
 	}
 }

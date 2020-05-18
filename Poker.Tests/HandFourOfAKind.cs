@@ -8,6 +8,7 @@ using System.Text;
 namespace Poker.Tests
 {
 	[TestClass]
+	[TestCategory("Hand")]
 	public class HandFourOfAKind
 	{
 		[TestMethod]
@@ -24,10 +25,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, "J"));
 
 			//Act
-			FourOfAKind fourOfAKind = new FourOfAKind(cards);
+			FourOfAKind fourOfAKind = new FourOfAKind();
 
 			//Assert
-			Assert.IsTrue(fourOfAKind.IsMatch());
+			Assert.IsNotNull(fourOfAKind.IsMatch(cards));
 			Assert.AreEqual(5, fourOfAKind.CardsInTheHand.Count);
 			Assert.AreEqual(14, fourOfAKind.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.FourOfAKind, fourOfAKind.Rank);
@@ -47,10 +48,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, "J"));
 
 			//Act
-			FourOfAKind fourOfAKind = new FourOfAKind(cards);
+			FourOfAKind fourOfAKind = new FourOfAKind();
 
 			//Assert
-			Assert.IsFalse(fourOfAKind.IsMatch());
+			Assert.IsNull(fourOfAKind.IsMatch(cards));
 		}
 	}
 }

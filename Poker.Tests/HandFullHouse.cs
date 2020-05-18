@@ -8,6 +8,7 @@ using System.Text;
 namespace Poker.Tests
 {
 	[TestClass]
+	[TestCategory("Hand")]
 	public class HandFullHouse
 	{
 		[TestMethod]
@@ -24,10 +25,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Dimensions, "A"));
 
 			//Act
-			FullHouse fullHouse = new FullHouse(cards);
+			FullHouse fullHouse = new FullHouse();
 
 			//Assert
-			Assert.IsTrue(fullHouse.IsMatch());
+			Assert.IsNotNull(fullHouse.IsMatch(cards));
 			Assert.AreEqual(5, fullHouse.CardsInTheHand.Count);
 			Assert.AreEqual(3, fullHouse.CardsInTheHand[0].Value);
 			Assert.AreEqual(14, fullHouse.CardsInTheHand[4].Value);
@@ -48,10 +49,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Dimensions, "A"));
 
 			//Act
-			FullHouse fullHouse = new FullHouse(cards);
+			FullHouse fullHouse = new FullHouse();
 
 			//Assert
-			Assert.IsFalse(fullHouse.IsMatch());
+			Assert.IsNull(fullHouse.IsMatch(cards));
 		}
 	}
 }
