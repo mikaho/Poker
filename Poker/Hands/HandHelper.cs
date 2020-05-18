@@ -90,5 +90,14 @@ namespace Poker.Hands
 							.Take(take)
 							.ToList();
 		}
+
+		public static void ThrowIfDuplicate(IEnumerable<Card> cards)
+		{
+			var duplicates = cards.GroupBy(s => new { s.Suit, s.Value })
+				.SelectMany(grp => grp.Skip(1));
+
+			if (duplicates.Any())
+				throw new InvalidOperationException();
+		}
 	}
 }

@@ -30,11 +30,7 @@ namespace Poker.Hands
 
 		protected void ThrowIfDuplicate(IEnumerable<Card> cards)
 		{
-			var duplicates = cards.GroupBy(s => new { s.Suit, s.Value })
-				.SelectMany(grp => grp.Skip(1));
-
-			if (duplicates.Any())
-				throw new InvalidOperationException();
+			HandHelper.ThrowIfDuplicate(cards);
 		}
 
 		protected Hand Next(IEnumerable<Card> cards)
