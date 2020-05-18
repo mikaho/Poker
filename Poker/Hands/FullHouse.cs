@@ -20,12 +20,7 @@ namespace Poker.Hands
 			if (cards.Count() < 5)
 				return Next(cards);
 
-			List<Card> treeOfAKind = cards.GroupBy(s => s.Value)
-				.Where(g => g.Count() >= 3)
-				.SelectMany(grp => grp)
-				.OrderByDescending(c => c.Value)
-				.Take(3)
-				.ToList();
+			List<Card> treeOfAKind = HandHelper.GetOfAKind(cards, 3); ;
 
 			if (treeOfAKind.Count != 3)
 				return Next(cards);
@@ -33,12 +28,7 @@ namespace Poker.Hands
 			List<Card> remainingCard = cards.ToList()
 				.FindAll(c => c.Value != treeOfAKind.First().Value);
 
-			List<Card> pair = remainingCard.GroupBy(s => s.Value)
-				.Where(g => g.Count() == 2)
-				.SelectMany(grp => grp)
-				.OrderByDescending(c => c.Value)
-				.Take(2)
-				.ToList();
+			List<Card> pair = HandHelper.GetOfAKind(remainingCard, 2);
 
 			if (pair.Count != 2)
 				return Next(cards);

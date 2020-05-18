@@ -20,21 +20,12 @@ namespace Poker.Hands
 			if (cards.Count() < 5)
 				return Next(cards);
 
-			List<Card> threeOfAKind = cards.GroupBy(s => s.Value)
-				.Where(g => g.Count() >= 3)
-				.SelectMany(grp => grp)
-				.OrderByDescending(c => c.Value)
-				.Take(3)
-				.ToList();
+			List<Card> threeOfAKind = HandHelper.GetOfAKind(cards, 3);
 
 			if (threeOfAKind.Count != 3)
 				return Next(cards);
 
-			List<Card> highCards = cards.ToList()
-				.FindAll(c => c.Value != threeOfAKind.First().Value)
-				.OrderByDescending(c => c.Value)
-				.Take(2)
-				.ToList();
+			List<Card> highCards = HandHelper.GetHighCards(cards, threeOfAKind);
 
 			List<Card> finalCards = new List<Card>(threeOfAKind);
 			finalCards.AddRange(highCards);
@@ -42,5 +33,7 @@ namespace Poker.Hands
 
 			return this;
 		}
+
+		
 	}
 }

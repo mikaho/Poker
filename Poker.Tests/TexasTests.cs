@@ -86,10 +86,7 @@ namespace Poker.Tests
 			TexasGame texasGame = Create();
 
 			//Act
-			while (texasGame.HasDealLeft())
-			{
-				texasGame.Deal();
-			}
+			DealToTheEnd(texasGame);
 
 			//Assert
 			Assert.AreEqual(2, texasGame.PlayerCards[0].Cards.Count);
@@ -97,6 +94,14 @@ namespace Poker.Tests
 			Assert.AreEqual(5, texasGame.DoardCards.Count);
 			Assert.AreEqual(52 - 12, texasGame.Deck.Cards.Count);
 			Assert.AreEqual(0, texasGame.DealsLeft);
+		}
+
+		private static void DealToTheEnd(TexasGame texasGame)
+		{
+			while (texasGame.HasDealLeft())
+			{
+				texasGame.Deal();
+			}
 		}
 	}
 }

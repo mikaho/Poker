@@ -6,11 +6,10 @@ using System.Text;
 
 namespace Poker.Hands
 {
-	public class Flush : Hand
+	public class HighCard : Hand
 	{
-
-		public Flush(Hand next = null)
-			: base(Constancts.HandRanks.Flush, next)
+		public HighCard()
+			: base(Constancts.HandRanks.HighCard, null)
 		{
 		}
 
@@ -18,15 +17,12 @@ namespace Poker.Hands
 		{
 			ThrowIfDuplicate(cards);
 
-			if (cards.Count() < 5)
+			if (cards.Count() == 0)
 				return Next(cards);
 
-			List<Card> cardsInSuit = HandHelper.GetSuitedCards(cards);
 
-			if (cardsInSuit.Count != 5)
-				return Next(cards);
-
-			SetHandCards(cardsInSuit);
+			List<Card> highCards = HandHelper.GetHighCards(cards);
+			SetHandCards(highCards);
 
 			return this;
 		}

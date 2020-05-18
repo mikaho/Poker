@@ -17,24 +17,15 @@ namespace Poker.Hands
 		{
 			ThrowIfDuplicate(cards);
 
-			if (cards.Count() < 5)
+			if (cards.Count() < 2)
 				return Next(cards);
 
-			List<Card> pair = cards.GroupBy(s => s.Value)
-				.Where(g => g.Count() >= 2)
-				.SelectMany(grp => grp)
-				.OrderByDescending(c => c.Value)
-				.Take(2)
-				.ToList();
+			List<Card> pair = HandHelper.GetOfAKind(cards, 2);
 
 			if (pair.Count != 2)
 				return Next(cards);
 
-			List<Card> highCards = cards.ToList()
-				.FindAll(c => c.Value != pair.First().Value)
-				.OrderByDescending(c => c.Value)
-				.Take(3)
-				.ToList();
+			List<Card> highCards = HandHelper.GetHighCards(cards, pair);
 
 			List<Card> finalCards = new List<Card>(pair);
 			finalCards.AddRange(highCards);

@@ -20,26 +20,20 @@ namespace Poker.Hands
 			if (cards.Count() < 5)
 				return Next(cards);
 
-			List<Card> fourOfAKind = cards.GroupBy(s => s.Value)
-				.Where(g => g.Count() >= 4)
-				.SelectMany(grp => grp)
-				.OrderByDescending(c => c.Value)
-				.Take(4)
-				.ToList();
+			List<Card> fourOfAKind = HandHelper.GetOfAKind(cards, 4);
 
 			if (fourOfAKind.Count != 4)
 				return Next(cards);
 
-			Card highCard = cards.ToList()
-				.FindAll(c => c.Value != fourOfAKind.First().Value)
-				.OrderByDescending(c => c.Value)
-				.First();
+			List<Card> highCards = HandHelper.GetHighCards(cards, fourOfAKind);
 
 			List<Card> finalCards = new List<Card>(fourOfAKind);
-			finalCards.Add(highCard);
+			finalCards.Add(highCards.First());
 			SetHandCards(finalCards);
 
 			return this;
 		}
+
+		
 	}
 }

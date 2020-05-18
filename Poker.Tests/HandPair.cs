@@ -39,6 +39,21 @@ namespace Poker.Tests
 		}
 
 		[TestMethod]
+		public void HandIsPairWithTwoCards()
+		{
+			//Arrange
+			List<Card> cards = new List<Card>();
+			cards.Add(new Card(Suits.Hearts, 7));
+			cards.Add(new Card(Suits.Spades, 7));
+
+			//Act
+			Pair pair = new Pair();
+
+			//Assert
+			Assert.IsNotNull(pair.IsMatch(cards));
+		}
+
+		[TestMethod]
 		public void HandIsNotPair()
 		{
 			//Arrange

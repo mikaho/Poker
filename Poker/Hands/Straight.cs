@@ -37,56 +37,13 @@ namespace Poker.Hands
 				.OrderByDescending(c => c.Value)
 				.ToList();
 
-			List<Card> straight = ResolveStraight(cardsInStraight);
+			List<Card> straight = HandHelper.ResolveStraight(cardsInStraight);
 			if (straight.Count != 5)
 				return Next(cards);
 
 			SetHandCards(straight);
 
 			return this;
-		}
-
-		private static List<Card> ResolveStraight(List<Card> cardsInSuit)
-		{
-			List<Card> straightCards = new List<Card>();
-			Card ace = null;
-			foreach (Card card in cardsInSuit)
-			{
-				if (!straightCards.Any())
-				{
-					if (card.Value == 14)
-						ace = card;
-					else
-						straightCards.Add(card);
-				}
-				else
-				{
-					Card lastCard = straightCards.Last();
-					if (lastCard.Value == card.Value + 1)
-					{
-						straightCards.Add(card);
-					}
-					else
-					{
-						if (straightCards.Count < 4)
-						{
-							straightCards.Clear();
-							straightCards.Add(card);
-						}
-					}
-				}
-			}
-
-			if (ace != null && straightCards.Count == 4)
-			{
-				Card firstCard = straightCards.First();
-				if (firstCard.Value == 5)
-					straightCards.Add(ace);
-				else if (firstCard.Value == 13)
-					straightCards.Insert(0, ace);
-			}
-
-			return straightCards.Take(5).ToList();
 		}
 	}
 }

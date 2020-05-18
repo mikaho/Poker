@@ -11,7 +11,8 @@ namespace Poker.Texas
 		private readonly Hand root;
 		public TexasHandSelector()
 		{
-			Pair pair = new Pair();
+			HighCard highCard = new HighCard();
+			Pair pair = new Pair(highCard);
 			TwoPairs twoPairs = new TwoPairs(pair);
 			TreeOfAKind treeOfAKind = new TreeOfAKind(twoPairs);
 			Straight straight = new Straight(treeOfAKind);
