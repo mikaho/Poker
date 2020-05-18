@@ -25,15 +25,15 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, "J"));
 
 			//Act
-			TwoPairs threeOfAKind = new TwoPairs();
+			TwoPairs twoPairs = new TwoPairs();
 
 			//Assert
-			Assert.IsNotNull(threeOfAKind.IsMatch(cards));
-			Assert.AreEqual(5, threeOfAKind.CardsInTheHand.Count);
-			Assert.AreEqual(3, threeOfAKind.CardsInTheHand[0].Value);
-			Assert.AreEqual(2, threeOfAKind.CardsInTheHand[2].Value);
-			Assert.AreEqual(14, threeOfAKind.CardsInTheHand[4].Value);
-			Assert.AreEqual(Constancts.HandRanks.TwoPairs, threeOfAKind.Rank);
+			Assert.IsNotNull(twoPairs.IsMatch(cards));
+			Assert.AreEqual(5, twoPairs.CardsInTheHand.Count);
+			Assert.AreEqual(3, twoPairs.CardsInTheHand[0].Value);
+			Assert.AreEqual(2, twoPairs.CardsInTheHand[2].Value);
+			Assert.AreEqual(14, twoPairs.CardsInTheHand[4].Value);
+			Assert.AreEqual(Constancts.HandRanks.TwoPairs, twoPairs.Rank);
 		}
 
 		[TestMethod]
