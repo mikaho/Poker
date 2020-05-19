@@ -29,8 +29,6 @@ namespace Poker.Core
 		// Suffle
 		public void Suffle()
 		{
-			Dictionary<int, int> positionChanges = new Dictionary<int, int>();
-
 			Enumerable.Range(0, 500).ToList().ForEach(i =>
 			{
 				int indexToTake = new Randomizer().Next(0, Cards.Count);
@@ -39,16 +37,7 @@ namespace Poker.Core
 
 				int indexToInsert = new Randomizer().Next(0, Cards.Count);
 				cards.Insert(indexToInsert, cardToMove);
-				Increment(positionChanges, indexToTake);
-				Increment(positionChanges, indexToInsert);
 			});
-		}
-
-		private static void Increment(Dictionary<int, int> positionChanges, int index)
-		{
-			if (!positionChanges.ContainsKey(index))
-				positionChanges.Add(index, 0);
-			positionChanges[index]++;
 		}
 
 		// Take card from top
