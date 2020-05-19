@@ -29,15 +29,27 @@ namespace Poker.Core
 		// Suffle
 		public void Suffle()
 		{
+			Dictionary<int, int> positionChanges = new Dictionary<int, int>();
+
 			Enumerable.Range(0, 500).ToList().ForEach(i =>
 			{
-				int indexToTake = new Randomizer().Next(0, Cards.Count - 1);
+				int indexToTake = new Randomizer().Next(0, Cards.Count);
 				Card cardToMove = cards[indexToTake];
 				cards.Remove(cardToMove);
 
-				int indexToInsert = new Randomizer().Next(0, Cards.Count - 1);
+				int indexToInsert = new Randomizer().Next(0, Cards.Count);
 				cards.Insert(indexToInsert, cardToMove);
+				Increment(positionChanges, indexToTake);
+				Increment(positionChanges, indexToInsert);
 			});
+			var x = positionChanges;
+		}
+
+		private static void Increment(Dictionary<int, int> positionChanges, int index)
+		{
+			if (!positionChanges.ContainsKey(index))
+				positionChanges.Add(index, 0);
+			positionChanges[index]++;
 		}
 
 		// Take card from top

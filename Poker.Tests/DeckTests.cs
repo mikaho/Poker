@@ -26,9 +26,9 @@ namespace Poker.Tests
 		{
 			//Arrange
 			Deck deck = new Deck();
+			int originalSum = deck.Cards.Sum(c => c.Value);
 
 			//Act
-			int originalSum = deck.Cards.Sum(c => c.Value);
 			IReadOnlyList<Card> originalOrder = deck.Cards;
 			deck.Suffle();
 			IReadOnlyList<Card> suffledOrder = deck.Cards;
