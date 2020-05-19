@@ -18,6 +18,7 @@ namespace Poker.Ranks
 
 		public IReadOnlyList<HandRank> RankPlayerHands(IEnumerable<Player> players, IEnumerable<Card> doardCards)
 		{
+			
 			// TODO: Implement
 			Dictionary<Player, Hand> hands = new Dictionary<Player, Hand>();
 			foreach (Player player in players)
@@ -29,7 +30,13 @@ namespace Poker.Ranks
 				hands.Add(player, hand);
 			}
 
-			//hands.Values.OrderByDescending(h => h.Rank)
+			List<HandRank> handRanks = new List<HandRank>();
+			var hardsInOrder = hands.ToList().OrderByDescending(h => h);
+			foreach (var playerHand in hardsInOrder)
+			{
+				//handRanks.
+				//handRanks.Add
+			}
 
 			return null;
 		}

@@ -1,12 +1,14 @@
-﻿using Poker.Core;
+﻿using Poker.Common;
+using Poker.Core;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
 namespace Poker.Hands
 {
-	public abstract class Hand
+	public abstract class Hand : Entity, IComparable<Hand>
 	{
 		private readonly Hand next;
 
@@ -39,6 +41,31 @@ namespace Poker.Hands
 				return null;
 
 			return next.IsMatch(cards);
+		}
+
+		public int CompareTo([NotNull] Hand other)
+		{
+			if (cardsInHand.Count != other.CardsInTheHand.Count)
+				throw new InvalidOperationException();
+
+			if (Rank == other.Rank)
+			{
+				for (int i = 0; i < cardsInHand.Count; i++)
+				{
+					Card card = cardsInHand[i];
+					Card otherHandCard = other.CardsInTheHand[i];
+					if (card.Value != otherHandCard.Value)
+					{
+						return card.Value.CompareTo(otherHandCard.Value);
+					}
+				}
+
+				return 0; // Same hands
+			}
+			else
+			{
+				return Rank.CompareTo(other.Rank);
+			}
 		}
 	}
 }
