@@ -151,6 +151,10 @@ namespace Poker.Tests
 			Assert.AreEqual(Constancts.HandRanks.TwoPairs, ranks[1].Hand.Rank);
 			Assert.AreEqual(13, ranks[0].Hand.CardsInTheHand[0].Value);
 			Assert.AreEqual(5, ranks[0].Hand.CardsInTheHand[2].Value);
+			Assert.AreEqual(9, ranks[0].Hand.CardsInTheHand[4].Value);
+			Assert.AreEqual(11, ranks[1].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual(5, ranks[1].Hand.CardsInTheHand[2].Value);
+			Assert.AreEqual(9, ranks[1].Hand.CardsInTheHand[4].Value);
 		}
 	}
 }
