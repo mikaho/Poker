@@ -42,7 +42,6 @@ namespace Poker.Core
 				Increment(positionChanges, indexToTake);
 				Increment(positionChanges, indexToInsert);
 			});
-			var x = positionChanges;
 		}
 
 		private static void Increment(Dictionary<int, int> positionChanges, int index)
