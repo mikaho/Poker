@@ -28,6 +28,7 @@ namespace Poker.Hands
 				.ToList();
 
 			List<Card> pairsRemoved = new List<Card>(cards);
+			//TODO: Improve
 			if (pairs.Count >= 2)
 				pairsRemoved.Remove(pairs.Take(1).First());
 			if (pairs.Count >= 4)

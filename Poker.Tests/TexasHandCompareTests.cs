@@ -16,19 +16,18 @@ namespace Poker.Tests
 		[TestMethod]
 		public void CompareStrait()
 		{
-			Assert.Inconclusive("Homma kesken");
-
 			//Arrange
-			//List<PlayerCards> playerCards = new List<PlayerCards>
-			//{
-			//	new PlayerCards(new Player("Mika")),
-			//	new PlayerCards(new Player("Masa"))
-			//};
-			//playerCards[0].AddCard(new Card(Suits.Clubes, 11));
-			//playerCards[0].AddCard(new Card(Suits.Hearts, 9));
+			List<Player> players = new List<Player>
+			{
+				new Player("Mika"),
+				new Player("Masa")
+			};
 
-			//playerCards[0].AddCard(new Card(Suits.Spades, "A"));
-			//playerCards[0].AddCard(new Card(Suits.Spades, "K"));
+			players[0].AddCard(new Card(Suits.Clubes, 11));
+			players[0].AddCard(new Card(Suits.Hearts, 9));
+
+			players[1].AddCard(new Card(Suits.Spades, "A"));
+			players[1].AddCard(new Card(Suits.Spades, "K"));
 
 			List<Card> doardCards = new List<Card>
 			{
@@ -42,11 +41,17 @@ namespace Poker.Tests
 			HandCompare handCompare = new HandCompare(new TexasHandSelector());
 
 			//Act
-			//IReadOnlyList<HandRank> ranks = handCompare.RankPlayerHands(playerCards, doardCards);
+			IReadOnlyList<HandRank> ranks = handCompare.RankPlayerHands(players, doardCards);
 
 			//Assert
-			//Assert.AreEqual(5, ranks.PlayerCards[0].Cards.Count);
-			//Assert.AreEqual(5, texasGame.PlayerCards[1].Cards.Count);
+			Assert.AreEqual(1, ranks[0].Players.Count);
+			Assert.AreEqual(1, ranks[1].Players.Count);
+			Assert.AreEqual(0, ranks[0].Position);
+			Assert.AreEqual(1, ranks[1].Position);
+			Assert.AreEqual(Constancts.HandRanks.Straight, ranks[0].Hand.Rank);
+			Assert.AreEqual(Constancts.CardValues.Jack, ranks[0].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual(Constancts.HandRanks.HighCard, ranks[1].Hand.Rank);
+			Assert.AreEqual(Constancts.CardValues.Ace, ranks[1].Hand.CardsInTheHand[0].Value);
 		}
 	}
 }

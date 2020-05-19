@@ -61,15 +61,21 @@ namespace Poker.Hands
 							.ToList();
 		}
 
-		
 
-		public static List<Card> GetHighCards(IEnumerable<Card> cards, List<Card> cardToRemove)
+		public static List<Card> GetHighCards(IEnumerable<Card> cards, List<Card> cardsToRemove)
 		{
 			List<Card> remaining = cards.ToList()
-					.FindAll(c => c.Value != cardToRemove.First().Value);
+				.FindAll(c => c.Value != cardsToRemove.First().Value);
 			return GetHighCards(remaining)
-				.Take(5 - cardToRemove.Count)
+				.Take(5 - cardsToRemove.Count)
 				.ToList();
+		}
+
+		public static List<Card> GetRemainingCards(IEnumerable<Card> cards, List<Card> cardsToRemove)
+		{
+			List<Card> remaining = cards.ToList()
+					.FindAll(c => !cardsToRemove.Contains(c));
+			return remaining;
 		}
 
 		public static List<Card> GetHighCards(IEnumerable<Card> cards)

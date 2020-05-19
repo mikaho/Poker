@@ -18,8 +18,6 @@ namespace Poker.Ranks
 
 		public IReadOnlyList<HandRank> RankPlayerHands(IEnumerable<Player> players, IEnumerable<Card> doardCards)
 		{
-			
-			// TODO: Implement
 			Dictionary<Player, Hand> hands = new Dictionary<Player, Hand>();
 			foreach (Player player in players)
 			{
@@ -31,14 +29,36 @@ namespace Poker.Ranks
 			}
 
 			List<HandRank> handRanks = new List<HandRank>();
-			var hardsInOrder = hands.ToList().OrderByDescending(h => h);
-			foreach (var playerHand in hardsInOrder)
+			var hardsInOrder = hands.ToList().OrderByDescending(h => h.Value);
+			HandRank handRank = null;
+			foreach (var current in hardsInOrder)
 			{
-				//handRanks.
-				//handRanks.Add
+				if (!handRanks.Any())
+				{
+					handRank = AddNew(handRanks, current);
+				}
+				else
+				{
+					if (handRank.IsSame(current.Value))
+					{
+						handRank.AddPlayer(current.Key);
+					}
+					else
+					{
+						handRank = AddNew(handRanks, current);
+					}
+				}
 			}
 
-			return null;
+			return handRanks;
+		}
+
+		private static HandRank AddNew(List<HandRank> handRanks, KeyValuePair<Player, Hand> current)
+		{
+			HandRank handRank = new HandRank(handRanks.Count, current.Value);
+			handRank.AddPlayer(current.Key);
+			handRanks.Add(handRank);
+			return handRank;
 		}
 	}
 }
