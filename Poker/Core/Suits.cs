@@ -2,10 +2,9 @@
 {
 	public class Suits : Enumeration
 	{
-		public Suits(int id, string name)
+		private Suits(int id, string name)
 			: base(id, name)
 		{
-
 		}
 		
 		public static readonly Suits Hearts = new Suits(1, "Hearts");

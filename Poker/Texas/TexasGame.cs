@@ -51,15 +51,15 @@ namespace Poker.Texas
 
 		private void DealPlayerCards()
 		{
-			int expected = PlayerCards.Count * 2;
-			while (PlayerCards.Sum(p => p.Cards.Count) != expected)
+			int expected = Players.Count * 2;
+			while (Players.Sum(p => p.Cards.Count) != expected)
 			{
-				foreach (PlayerCards playerCards in PlayerCards)
+				foreach (Player player in Players)
 				{
-					if (playerCards.Cards.Count < 2)
+					if (player.Cards.Count < 2)
 					{
 						Card card = deck.TakeTopMostCard();
-						playerCards.AddCard(card);
+						player.AddCard(card);
 					}
 				}
 			}

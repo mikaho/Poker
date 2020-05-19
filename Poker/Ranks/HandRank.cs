@@ -8,13 +8,19 @@ namespace Poker.Ranks
 {
 	public class HandRank
 	{
-		private List<PlayerCards> playerCards = new List<PlayerCards>();
-		public IReadOnlyList<PlayerCards> PlayerCards => playerCards.ToList().AsReadOnly();
+		//private List<PlayerCards> playerCards = new List<PlayerCards>();
+		//public IReadOnlyList<PlayerCards> PlayerCards => playerCards.ToList().AsReadOnly();
 
-		public void AddPlayerCards(IEnumerable<PlayerCards> playerCards)
-		{
-			this.playerCards.Clear();
-			this.playerCards.AddRange(playerCards);
-		}
+		//public void AddPlayerCards(IEnumerable<PlayerCards> playerCards)
+		//{
+		//	this.playerCards.Clear();
+		//	this.playerCards.AddRange(playerCards);
+		//}
+
+		//public IReadOnlyList<Card> GetPlayerHand(Player player)
+		//{
+		//	// TODO: Implement
+		//	return null;
+		//}
 	}
 }

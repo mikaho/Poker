@@ -6,13 +6,13 @@ using System.Threading;
 
 namespace Poker.Core
 {
-	public class PlayerCards
+	public class XXXX_PlayerCards
 	{
 		private List<Card> cards = new List<Card>();
-		public PlayerCards(Player player)
-		{
-			Player = player;
-		}
+		//public PlayerCards(Player player)
+		//{
+		//	Player = player;
+		//}
 
 		public Player Player { get; }
 		public IReadOnlyList<Card> Cards => cards.ToList().AsReadOnly();

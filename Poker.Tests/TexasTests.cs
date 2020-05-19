@@ -23,9 +23,9 @@ namespace Poker.Tests
 
 			//Assert
 			Assert.AreEqual(2, texasGame.Players.Count);
-			Assert.AreEqual(2, texasGame.PlayerCards.Count);
-			Assert.AreEqual(2, texasGame.PlayerCards[0].Cards.Count);
-			Assert.AreEqual(2, texasGame.PlayerCards[1].Cards.Count);
+			Assert.AreEqual(2, texasGame.Players.Count);
+			Assert.AreEqual(2, texasGame.Players[0].Cards.Count);
+			Assert.AreEqual(2, texasGame.Players[1].Cards.Count);
 			Assert.AreEqual(48, texasGame.Deck.Cards.Count);
 			Assert.AreEqual(3, texasGame.DealsLeft);
 		}
@@ -37,21 +37,20 @@ namespace Poker.Tests
 		{
 			//Arrange
 			TexasGame texasGame = TexasGameHelper.Create();
-			texasGame.PlayerCards[0].AddCard(texasGame.Deck.PickCardFromDeck(new Card(Suits.Hearts, "A")));
-			texasGame.PlayerCards[0].AddCard(texasGame.Deck.PickCardFromDeck(new Card(Suits.Dimensions, "A")));
+			texasGame.Players[0].AddCard(texasGame.Deck.PickCardFromDeck(new Card(Suits.Hearts, "A")));
+			texasGame.Players[0].AddCard(texasGame.Deck.PickCardFromDeck(new Card(Suits.Dimensions, "A")));
 
 			//Act
 			texasGame.Deal();
 
 			//Assert
 			Assert.AreEqual(2, texasGame.Players.Count);
-			Assert.AreEqual(2, texasGame.PlayerCards.Count);
-			Assert.AreEqual(2, texasGame.PlayerCards[0].Cards.Count);
-			Assert.AreEqual(2, texasGame.PlayerCards[1].Cards.Count);
+			Assert.AreEqual(2, texasGame.Players[0].Cards.Count);
+			Assert.AreEqual(2, texasGame.Players[1].Cards.Count);
 			Assert.AreEqual(48, texasGame.Deck.Cards.Count);
-			PlayerCards playerCards = texasGame.PlayerCards[0];
-			Assert.AreEqual(14, playerCards.Cards[0].Value);
-			Assert.AreEqual(14, playerCards.Cards[1].Value);
+			Player player = texasGame.Players[0];
+			Assert.AreEqual(14, player.Cards[0].Value);
+			Assert.AreEqual(14, player.Cards[1].Value);
 		}
 
 		[TestMethod]
@@ -65,8 +64,8 @@ namespace Poker.Tests
 			texasGame.Deal();
 
 			//Assert
-			Assert.AreEqual(2, texasGame.PlayerCards[0].Cards.Count);
-			Assert.AreEqual(2, texasGame.PlayerCards[1].Cards.Count);
+			Assert.AreEqual(2, texasGame.Players[0].Cards.Count);
+			Assert.AreEqual(2, texasGame.Players[1].Cards.Count);
 			Assert.AreEqual(3, texasGame.DoardCards.Count);
 			Assert.AreEqual(44, texasGame.Deck.Cards.Count);
 			Assert.AreEqual(2, texasGame.DealsLeft);
@@ -82,8 +81,8 @@ namespace Poker.Tests
 			DealToTheEnd(texasGame);
 
 			//Assert
-			Assert.AreEqual(2, texasGame.PlayerCards[0].Cards.Count);
-			Assert.AreEqual(2, texasGame.PlayerCards[1].Cards.Count);
+			Assert.AreEqual(2, texasGame.Players[0].Cards.Count);
+			Assert.AreEqual(2, texasGame.Players[1].Cards.Count);
 			Assert.AreEqual(5, texasGame.DoardCards.Count);
 			Assert.AreEqual(52 - 12, texasGame.Deck.Cards.Count);
 			Assert.AreEqual(0, texasGame.DealsLeft);

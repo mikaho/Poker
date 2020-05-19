@@ -16,16 +16,17 @@ namespace Poker.Ranks
 			this.handSelector = handSelector;
 		}
 
-		public IReadOnlyList<HandRank> RankPlayerHands(IEnumerable<PlayerCards> playerCards, IEnumerable<Card> doardCards)
+		public IReadOnlyList<HandRank> RankPlayerHands(IEnumerable<Player> players, IEnumerable<Card> doardCards)
 		{
+			// TODO: Implement
 			Dictionary<Player, Hand> hands = new Dictionary<Player, Hand>();
-			foreach (PlayerCards player in playerCards)
+			foreach (Player player in players)
 			{
 				List<Card> cards = new List<Card>(player.Cards);
 				cards.AddRange(doardCards);
 
 				Hand hand = handSelector.SelectBest(cards);
-				hands.Add(player.Player, hand);
+				hands.Add(player, hand);
 			}
 
 			//hands.Values.OrderByDescending(h => h.Rank)

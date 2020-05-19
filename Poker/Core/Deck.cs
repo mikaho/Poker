@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Poker.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Poker.Core
 {
-	public class Deck
+	public class Deck : Entity
 	{
-
 		private List<Card> cards = new List<Card>();
 		public Deck()
 		{

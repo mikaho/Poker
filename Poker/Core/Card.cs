@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Poker.Common;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Poker.Core
 {
-	public class Card : IComparable<Card>
+	public class Card : ValueObject<Card>
 	{
 		public Card(Suits suit, int value)
 		{
@@ -53,26 +54,26 @@ namespace Poker.Core
 		public Suits Suit { get; }
 		public int Value { get; }
 
-		public int CompareTo([NotNull] Card other)
-		{
-			return other.Value.CompareTo(Value);
-		}
+		//public int CompareTo([NotNull] Card other)
+		//{
+		//	return other.Value.CompareTo(Value);
+		//}
 
-		public override bool Equals(object obj)
-		{
-			Card cardToCompare = obj as Card;
-			if (cardToCompare == null)
-				return false;
+		//public override bool Equals(object obj)
+		//{
+		//	Card cardToCompare = obj as Card;
+		//	if (cardToCompare == null)
+		//		return false;
 
-			return this.Value == cardToCompare.Value &&
-				this.Suit == cardToCompare.Suit;
-		}
+		//	return this.Value == cardToCompare.Value &&
+		//		this.Suit == cardToCompare.Suit;
+		//}
 
-		public override int GetHashCode()
-		{
-			//TODO: Fix
-			return base.GetHashCode();
-		}
+		//public override int GetHashCode()
+		//{
+		//	//TODO: Fix
+		//	return base.GetHashCode();
+		//}
 
 
 		public override string ToString()
@@ -133,6 +134,16 @@ namespace Poker.Core
 			}
 
 			return valueInString;
+		}
+
+		protected override bool EqualsCore(Card other)
+		{
+			return Value == other.Value && Suit == other.Suit;
+		}
+
+		protected override int GetHashCodeCore()
+		{
+			return $"{Value}{Suit}".GetHashCode();
 		}
 	}
 }

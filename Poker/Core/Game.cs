@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Poker.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Poker.Core
 {
-	public abstract class Game 
+	public abstract class Game : AggregateRoot
 	{
 		protected int NumberOfDeals;
 		protected Deck deck;
@@ -19,8 +20,8 @@ namespace Poker.Core
 		List<Player> players = new List<Player>();
 		public IReadOnlyList<Player> Players => players.ToList().AsReadOnly();
 
-		List<PlayerCards> playerCards = new List<PlayerCards>();
-		public IReadOnlyList<PlayerCards> PlayerCards => playerCards.ToList().AsReadOnly();
+		//List<PlayerCards> playerCards = new List<PlayerCards>();
+		//public IReadOnlyList<PlayerCards> PlayerCards => playerCards.ToList().AsReadOnly();
 		public Deck Deck => deck;
 
 		public void AddPlayer(Player player)
@@ -28,19 +29,18 @@ namespace Poker.Core
 			if (!players.Exists(p => p.Id == player.Id))
 			{
 				players.Add(player);
-				playerCards.Add(new PlayerCards(player));
+				//playerCards.Add(new PlayerCards(player));
 			}
 		}
 
-		public void AddPlayerCard(Player player, Card card)
-		{
-			if (players.Exists(p => p.Id == player.Id) &&
-				playerCards.Exists(p => p.Player.Id == player.Id))
-			{
-				PlayerCards p = playerCards.Find(p => p.Player.Id == player.Id);
-				p.AddCard(card);
-			}
-		}
+		//public void AddPlayerCard(Player player, Card card)
+		//{
+		//	if (players.Exists(p => p.Id == player.Id))
+		//	{
+		//		PlayerCards p = playerCards.Find(p => p.Player.Id == player.Id);
+		//		p.AddCard(card);
+		//	}
+		//}
 
 		public abstract void Deal();
 		public abstract int DealsLeft { get; }
