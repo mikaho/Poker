@@ -14,20 +14,16 @@ namespace Poker.Tests
 	public class TexasHandCompareTests
 	{
 		[TestMethod]
-		public void CompareStrait()
+		public void CompareStraitToHighCard()
 		{
 			//Arrange
-			List<Player> players = new List<Player>
-			{
-				new Player("Mika"),
-				new Player("Masa")
-			};
-
-			players[0].AddCard(new Card(Suits.Clubes, 11));
-			players[0].AddCard(new Card(Suits.Hearts, 9));
-
-			players[1].AddCard(new Card(Suits.Spades, "A"));
-			players[1].AddCard(new Card(Suits.Spades, "K"));
+			List<Player> players = TestHelper.CreatePlayers();
+			TestHelper.AddCardsToPlayer(players, "Mika",
+				new Card(Suits.Clubes, 11),
+				new Card(Suits.Hearts, 9));
+			TestHelper.AddCardsToPlayer(players, "Masa",
+				new Card(Suits.Spades, "A"),
+				new Card(Suits.Spades, "K"));
 
 			List<Card> doardCards = new List<Card>
 			{
@@ -38,20 +34,89 @@ namespace Poker.Tests
 				new Card(Suits.Hearts, 7)
 			};
 
-			HandCompare handCompare = new HandCompare(new TexasHandSelector());
-
 			//Act
+			HandCompare handCompare = new HandCompare(new TexasHandSelector());
 			IReadOnlyList<HandRank> ranks = handCompare.RankPlayerHands(players, doardCards);
 
 			//Assert
 			Assert.AreEqual(1, ranks[0].Players.Count);
 			Assert.AreEqual(1, ranks[1].Players.Count);
-			Assert.AreEqual(0, ranks[0].Position);
-			Assert.AreEqual(1, ranks[1].Position);
+			Assert.AreEqual(1, ranks[0].Position);
+			Assert.AreEqual(2, ranks[1].Position);
 			Assert.AreEqual(Constancts.HandRanks.Straight, ranks[0].Hand.Rank);
 			Assert.AreEqual(Constancts.CardValues.Jack, ranks[0].Hand.CardsInTheHand[0].Value);
 			Assert.AreEqual(Constancts.HandRanks.HighCard, ranks[1].Hand.Rank);
 			Assert.AreEqual(Constancts.CardValues.Ace, ranks[1].Hand.CardsInTheHand[0].Value);
+		}
+
+
+		[TestMethod]
+		public void CompareStraitToFullHouseCard()
+		{
+			//Arrange
+			List<Player> players = TestHelper.CreatePlayers();
+			TestHelper.AddCardsToPlayer(players, "Mika",
+				new Card(Suits.Clubes, "J"),
+				new Card(Suits.Hearts, 9));
+
+			TestHelper.AddCardsToPlayer(players, "Masa",
+				new Card(Suits.Spades, "A"),
+				new Card(Suits.Spades, "K"));
+
+			List<Card> doardCards = new List<Card>
+			{
+				new Card(Suits.Dimensions, "Q"),
+				new Card(Suits.Dimensions, "T"),
+				new Card(Suits.Clubes, "A"),
+				new Card(Suits.Clubes, "K"),
+				new Card(Suits.Hearts, "K")
+			};
+
+			//Act
+			HandCompare handCompare = new HandCompare(new TexasHandSelector());
+			IReadOnlyList<HandRank> ranks = handCompare.RankPlayerHands(players, doardCards);
+
+			//Assert
+			Assert.AreEqual(1, ranks[0].Players.Count);
+			Assert.AreEqual(1, ranks[1].Players.Count);
+			Assert.AreEqual(Constancts.HandRanks.FullHouse, ranks[0].Hand.Rank);
+			Assert.AreEqual(Constancts.CardValues.King, ranks[0].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual(Constancts.HandRanks.Straight, ranks[1].Hand.Rank);
+			Assert.AreEqual(Constancts.CardValues.Ace, ranks[1].Hand.CardsInTheHand[0].Value);
+		}
+
+		[TestMethod]
+		public void TwoPlayersHaveFourOfAKindCard()
+		{
+			//Arrange
+			List<Player> players = TestHelper.CreatePlayers();
+			TestHelper.AddCardsToPlayer(players, "Mika",
+				new Card(Suits.Clubes, "J"),
+				new Card(Suits.Hearts, 9));
+
+			TestHelper.AddCardsToPlayer(players, "Masa",
+				new Card(Suits.Spades, "J"),
+				new Card(Suits.Spades, "K"));
+
+			List<Card> doardCards = new List<Card>
+			{
+				new Card(Suits.Dimensions, 2),
+				new Card(Suits.Clubes, 2),
+				new Card(Suits.Hearts, 2),
+				new Card(Suits.Spades, 2),
+				new Card(Suits.Hearts, "A")
+			};
+
+			//Act
+			HandCompare handCompare = new HandCompare(new TexasHandSelector());
+			IReadOnlyList<HandRank> ranks = handCompare.RankPlayerHands(players, doardCards);
+
+			//Assert
+			Assert.AreEqual(1, ranks.Count);
+			Assert.AreEqual(2, ranks[0].Players.Count);
+			Assert.AreEqual(Constancts.HandRanks.FourOfAKind, ranks[0].Hand.Rank);
+			Assert.AreEqual(2, ranks[0].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual(Constancts.CardValues.Ace, ranks[0].Hand.CardsInTheHand[4].Value);
 		}
 	}
 }

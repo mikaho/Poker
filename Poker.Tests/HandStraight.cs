@@ -35,6 +35,31 @@ namespace Poker.Tests
 			Assert.AreEqual(Constancts.HandRanks.Straight, straight.Rank);
 		}
 
+		[TestMethod]
+		public void HandIsStraightAceHigh()
+		{
+			//Arrange
+			List<Card> cards = new List<Card>()
+			{
+				new Card(Suits.Clubes, "J"),
+				new Card(Suits.Hearts, 9),
+				new Card(Suits.Dimensions, "Q"),
+				new Card(Suits.Dimensions, "T"),
+				new Card(Suits.Clubes, "A"),
+				new Card(Suits.Clubes, "K"),
+				new Card(Suits.Hearts, "K")
+			};
+
+			//Act
+			Straight straight = new Straight();
+
+			//Assert
+			Assert.IsNotNull(straight.IsMatch(cards));
+			Assert.AreEqual(5, straight.CardsInTheHand.Count);
+			Assert.AreEqual(14, straight.CardsInTheHand[0].Value);
+			Assert.AreEqual(10, straight.CardsInTheHand[4].Value);
+			Assert.AreEqual(Constancts.HandRanks.Straight, straight.Rank);
+		}
 
 		[TestMethod]
 		public void HandIsNotStraight()

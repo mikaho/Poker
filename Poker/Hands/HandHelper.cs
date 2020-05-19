@@ -39,13 +39,17 @@ namespace Poker.Hands
 				}
 			}
 
-			if (ace != null && straightCards.Count == 4)
+			if (ace != null)
 			{
 				Card firstCard = straightCards.First();
 				if (firstCard.Value == 5)
+				{
 					straightCards.Add(ace);
+				}
 				else if (firstCard.Value == 13)
+				{
 					straightCards.Insert(0, ace);
+				}
 			}
 
 			return straightCards.Take(5).ToList();

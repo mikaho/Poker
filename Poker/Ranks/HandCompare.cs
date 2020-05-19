@@ -18,6 +18,8 @@ namespace Poker.Ranks
 
 		public IReadOnlyList<HandRank> RankPlayerHands(IEnumerable<Player> players, IEnumerable<Card> doardCards)
 		{
+			ThrowIfDuplicate(players, doardCards);
+
 			Dictionary<Player, Hand> hands = new Dictionary<Player, Hand>();
 			foreach (Player player in players)
 			{
@@ -53,9 +55,17 @@ namespace Poker.Ranks
 			return handRanks;
 		}
 
+		private void ThrowIfDuplicate(IEnumerable<Player> players, IEnumerable<Card> doardCards)
+		{
+			List<Card> cards = new List<Card>(doardCards);
+			players.ToList().ForEach(p => cards.AddRange(p.Cards));
+
+			HandHelper.ThrowIfDuplicate(cards);
+		}
+
 		private static HandRank AddNew(List<HandRank> handRanks, KeyValuePair<Player, Hand> current)
 		{
-			HandRank handRank = new HandRank(handRanks.Count, current.Value);
+			HandRank handRank = new HandRank(handRanks.Count + 1, current.Value);
 			handRank.AddPlayer(current.Key);
 			handRanks.Add(handRank);
 			return handRank;
