@@ -36,9 +36,7 @@ namespace Poker.Hands
 			List<Card> finalCards = new List<Card>(treeOfAKind);
 			finalCards.AddRange(pair);
 
-			SetHandCards(finalCards);
-
-			return this;
+			return CreateCopy<FullHouse>(finalCards);
 		}
 	}
 }

@@ -26,9 +26,7 @@ namespace Poker.Hands
 			if (cardsInSuit.Count != 5)
 				return Next(cards);
 
-			SetHandCards(cardsInSuit);
-
-			return this;
+			return CreateCopy<Flush>(cardsInSuit);
 		}
 	}
 }

@@ -31,7 +31,7 @@ namespace Poker.Ranks
 			if (!players.Any())
 				return false;
 
-			return Hand == hand;
+			return Hand.CompareTo(hand) == 0;
 		}
 	}
 }

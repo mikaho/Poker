@@ -29,9 +29,8 @@ namespace Poker.Hands
 
 			List<Card> finalCards = new List<Card>(threeOfAKind);
 			finalCards.AddRange(highCards);
-			SetHandCards(finalCards);
 
-			return this;
+			return CreateCopy<TreeOfAKind>(finalCards);
 		}
 
 		

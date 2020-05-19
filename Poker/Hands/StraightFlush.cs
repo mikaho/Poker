@@ -30,9 +30,7 @@ namespace Poker.Hands
 			if (straightFlushCards.Count != 5)
 				return Next(cards);
 
-			SetHandCards(straightFlushCards);
-
-			return this;
+			return CreateCopy<StraightFlush>(straightFlushCards);
 		}
 
 		

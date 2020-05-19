@@ -25,10 +25,11 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, "J"));
 
 			//Act
-			TreeOfAKind threeOfAKind = new TreeOfAKind();
+			TreeOfAKind h = new TreeOfAKind();
+			Hand threeOfAKind = h.IsMatch(cards);
 
 			//Assert
-			Assert.IsNotNull(threeOfAKind.IsMatch(cards));
+			Assert.IsNotNull(threeOfAKind);
 			Assert.AreEqual(5, threeOfAKind.CardsInTheHand.Count);
 			Assert.AreEqual(14, threeOfAKind.CardsInTheHand[3].Value);
 			Assert.AreEqual(13, threeOfAKind.CardsInTheHand[4].Value);

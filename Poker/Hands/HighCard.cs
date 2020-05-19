@@ -8,7 +8,7 @@ namespace Poker.Hands
 {
 	public class HighCard : Hand
 	{
-		public HighCard()
+		public HighCard(Hand next = null)
 			: base(Constancts.HandRanks.HighCard, null)
 		{
 		}
@@ -20,11 +20,9 @@ namespace Poker.Hands
 			if (cards.Count() == 0)
 				return Next(cards);
 
-
 			List<Card> highCards = HandHelper.GetHighCards(cards);
-			SetHandCards(highCards);
 
-			return this;
+			return CreateCopy<HighCard>(highCards);
 		}
 	}
 }

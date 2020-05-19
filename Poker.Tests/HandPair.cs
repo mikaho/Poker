@@ -25,10 +25,11 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, 9));
 
 			//Act
-			Pair pair = new Pair();
+			Pair h = new Pair();
+			Hand pair = h.IsMatch(cards);
 
 			//Assert
-			Assert.IsNotNull(pair.IsMatch(cards));
+			Assert.IsNotNull(pair);
 			Assert.AreEqual(5, pair.CardsInTheHand.Count);
 			Assert.AreEqual(7, pair.CardsInTheHand[0].Value);
 			Assert.AreEqual(7, pair.CardsInTheHand[1].Value);

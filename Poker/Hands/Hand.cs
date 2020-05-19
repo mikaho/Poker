@@ -14,7 +14,7 @@ namespace Poker.Hands
 
 		private List<Card> cardsInHand = new List<Card>();
 		public IReadOnlyList<Card> CardsInTheHand => cardsInHand.ToList().AsReadOnly();
-		public Hand(int rank, Hand next)
+		protected Hand(int rank, Hand next)
 		{
 			Rank = rank;
 			this.next = next;
@@ -24,7 +24,15 @@ namespace Poker.Hands
 
 		public abstract Hand IsMatch(IEnumerable<Card> cards);
 
-		protected void SetHandCards(IEnumerable<Card> handCards)
+		protected T CreateCopy<T>(IEnumerable<Card> handCards)
+			where T : Hand
+		{
+			T hand = (T)Activator.CreateInstance(GetType(), next);
+			hand.SetHandCards(handCards);
+			return hand;
+		}
+
+		private void SetHandCards(IEnumerable<Card> handCards)
 		{
 			cardsInHand.Clear();
 			cardsInHand.AddRange(handCards);

@@ -25,10 +25,11 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, "Q"));
 
 			//Act
-			Flush flush = new Flush();
+			Flush h = new Flush();
+			Hand flush = h.IsMatch(cards);
 
 			//Assert
-			Assert.IsNotNull(flush.IsMatch(cards));
+			Assert.IsNotNull(flush);
 			Assert.AreEqual(5, flush.CardsInTheHand.Count);
 			Assert.AreEqual(12, flush.CardsInTheHand[0].Value);
 			Assert.AreEqual(5, flush.CardsInTheHand[4].Value);

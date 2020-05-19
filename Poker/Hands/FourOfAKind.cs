@@ -29,9 +29,8 @@ namespace Poker.Hands
 
 			List<Card> finalCards = new List<Card>(fourOfAKind);
 			finalCards.Add(highCards.First());
-			SetHandCards(finalCards);
 
-			return this;
+			return CreateCopy<FourOfAKind>(finalCards);
 		}
 
 		

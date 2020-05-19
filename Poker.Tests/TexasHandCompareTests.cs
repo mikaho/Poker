@@ -86,7 +86,7 @@ namespace Poker.Tests
 		}
 
 		[TestMethod]
-		public void TwoPlayersHaveFourOfAKindCard()
+		public void TwoPlayersHaveingFourOfAKind()
 		{
 			//Arrange
 			List<Player> players = TestHelper.CreatePlayers();
@@ -117,6 +117,40 @@ namespace Poker.Tests
 			Assert.AreEqual(Constancts.HandRanks.FourOfAKind, ranks[0].Hand.Rank);
 			Assert.AreEqual(2, ranks[0].Hand.CardsInTheHand[0].Value);
 			Assert.AreEqual(Constancts.CardValues.Ace, ranks[0].Hand.CardsInTheHand[4].Value);
+		}
+
+		[TestMethod]
+		public void TwoPlayersHaveingTwoPairs()
+		{
+			//Arrange
+			List<Player> players = TestHelper.CreatePlayers();
+			TestHelper.AddCardsToPlayer(players, "Mika",
+				new Card(Suits.Clubes, "J"),
+				new Card(Suits.Hearts, "J"));
+
+			TestHelper.AddCardsToPlayer(players, "Masa",
+				new Card(Suits.Dimensions, "K"),
+				new Card(Suits.Spades, "K"));
+
+			List<Card> doardCards = new List<Card>
+			{
+				new Card(Suits.Dimensions, 2),
+				new Card(Suits.Clubes, 2),
+				new Card(Suits.Hearts, 5),
+				new Card(Suits.Spades, 5),
+				new Card(Suits.Hearts, 9)
+			};
+
+			//Act
+			HandCompare handCompare = new HandCompare(new TexasHandSelector());
+			IReadOnlyList<HandRank> ranks = handCompare.RankPlayerHands(players, doardCards);
+
+			//Assert
+			Assert.AreEqual(2, ranks.Count);
+			Assert.AreEqual(Constancts.HandRanks.TwoPairs, ranks[0].Hand.Rank);
+			Assert.AreEqual(Constancts.HandRanks.TwoPairs, ranks[1].Hand.Rank);
+			Assert.AreEqual(13, ranks[0].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual(5, ranks[0].Hand.CardsInTheHand[2].Value);
 		}
 	}
 }

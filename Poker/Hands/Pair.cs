@@ -29,9 +29,8 @@ namespace Poker.Hands
 
 			List<Card> finalCards = new List<Card>(pair);
 			finalCards.AddRange(highCards);
-			SetHandCards(finalCards);
 
-			return this;
+			return CreateCopy<Pair>(finalCards);
 		}
 	}
 }

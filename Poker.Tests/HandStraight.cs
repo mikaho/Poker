@@ -25,10 +25,11 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, "Q"));
 
 			//Act
-			Straight straight = new Straight();
+			Straight h = new Straight();
+			Hand straight = h.IsMatch(cards);
 
 			//Assert
-			Assert.IsNotNull(straight.IsMatch(cards));
+			Assert.IsNotNull(straight);
 			Assert.AreEqual(5, straight.CardsInTheHand.Count);
 			Assert.AreEqual(10, straight.CardsInTheHand[0].Value);
 			Assert.AreEqual(6, straight.CardsInTheHand[4].Value);
@@ -51,10 +52,11 @@ namespace Poker.Tests
 			};
 
 			//Act
-			Straight straight = new Straight();
+			Straight h = new Straight();
+			Hand straight = h.IsMatch(cards);
 
 			//Assert
-			Assert.IsNotNull(straight.IsMatch(cards));
+			Assert.IsNotNull(straight);
 			Assert.AreEqual(5, straight.CardsInTheHand.Count);
 			Assert.AreEqual(14, straight.CardsInTheHand[0].Value);
 			Assert.AreEqual(10, straight.CardsInTheHand[4].Value);
@@ -95,10 +97,11 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, 5));
 
 			//Act
-			Straight straight = new Straight();
+			Straight h = new Straight();
+			Hand straight = h.IsMatch(cards);
 
 			//Assert
-			Assert.IsNotNull(straight.IsMatch(cards));
+			Assert.IsNotNull(straight);
 			Assert.AreEqual(5, straight.CardsInTheHand.Count);
 			Assert.AreEqual(9, straight.CardsInTheHand[0].Value);
 			Assert.AreEqual(5, straight.CardsInTheHand[4].Value);
@@ -119,10 +122,11 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, 2));
 
 			//Act
-			Straight straight = new Straight();
+			Straight h = new Straight();
+			Hand straight = h.IsMatch(cards);
 
 			//Assert
-			Assert.IsNotNull(straight.IsMatch(cards));
+			Assert.IsNotNull(straight);
 			Assert.AreEqual(5, straight.CardsInTheHand.Count);
 			Assert.AreEqual(6, straight.CardsInTheHand[0].Value);
 			Assert.AreEqual(2, straight.CardsInTheHand[4].Value);

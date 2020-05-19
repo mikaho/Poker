@@ -25,10 +25,11 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, "J"));
 
 			//Act
-			FourOfAKind fourOfAKind = new FourOfAKind();
+			FourOfAKind h = new FourOfAKind();
+			Hand fourOfAKind = h.IsMatch(cards);
 
 			//Assert
-			Assert.IsNotNull(fourOfAKind.IsMatch(cards));
+			Assert.IsNotNull(fourOfAKind);
 			Assert.AreEqual(5, fourOfAKind.CardsInTheHand.Count);
 			Assert.AreEqual(14, fourOfAKind.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.FourOfAKind, fourOfAKind.Rank);

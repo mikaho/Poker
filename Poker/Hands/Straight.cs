@@ -42,9 +42,7 @@ namespace Poker.Hands
 			if (straight.Count != 5)
 				return Next(cards);
 
-			SetHandCards(straight);
-
-			return this;
+			return CreateCopy<Straight>(straight);
 		}
 	}
 }

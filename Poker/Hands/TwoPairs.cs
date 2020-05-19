@@ -42,9 +42,8 @@ namespace Poker.Hands
 			Card highCard = highCards.OrderByDescending(c => c.Value).First();
 			List<Card> finalCards = new List<Card>(twoPairs);
 			finalCards.Add(highCard);
-			SetHandCards(finalCards);
 
-			return this;
+			return CreateCopy<TwoPairs>(finalCards);
 		}
 	}
 }

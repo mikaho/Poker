@@ -48,7 +48,6 @@ namespace Poker.Core
 			return cardToTake;
 		}
 
-		// Pick a card
 		public Card PickCardFromDeck(Card cardToPick)
 		{
 			Card cardTaken = cards.Find(c => c.Equals(cardToPick));

@@ -25,10 +25,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Dimensions, "A"));
 
 			//Act
-			FullHouse fullHouse = new FullHouse();
-
+			FullHouse h = new FullHouse();
+			Hand fullHouse = h.IsMatch(cards);
 			//Assert
-			Assert.IsNotNull(fullHouse.IsMatch(cards));
+			Assert.IsNotNull(fullHouse);
 			Assert.AreEqual(5, fullHouse.CardsInTheHand.Count);
 			Assert.AreEqual(3, fullHouse.CardsInTheHand[0].Value);
 			Assert.AreEqual(14, fullHouse.CardsInTheHand[4].Value);
