@@ -16,7 +16,7 @@ namespace Poker.Tests
 		public void TexasGameDealPlayerCards()
 		{
 			//Arrange
-			TexasGame texasGame = Create();
+			TexasGame texasGame = TexasGameHelper.Create();
 
 			//Act
 			texasGame.Deal();
@@ -30,20 +30,13 @@ namespace Poker.Tests
 			Assert.AreEqual(3, texasGame.DealsLeft);
 		}
 
-		private static TexasGame Create()
-		{
-			Deck deck = new Deck();
-			TexasGame texasGame = new TexasGame(deck);
-			texasGame.AddPlayer(new Player("Mika"));
-			texasGame.AddPlayer(new Player("Masa"));
-			return texasGame;
-		}
+		
 
 		[TestMethod]
 		public void TexasGameDealPlayerCardsAAToOnePlayer()
 		{
 			//Arrange
-			TexasGame texasGame = Create();
+			TexasGame texasGame = TexasGameHelper.Create();
 			texasGame.PlayerCards[0].AddCard(texasGame.Deck.PickCardFromDeck(new Card(Suits.Hearts, "A")));
 			texasGame.PlayerCards[0].AddCard(texasGame.Deck.PickCardFromDeck(new Card(Suits.Dimensions, "A")));
 
@@ -65,7 +58,7 @@ namespace Poker.Tests
 		public void TexasGameDealFlop()
 		{
 			//Arrange
-			TexasGame texasGame = Create();
+			TexasGame texasGame = TexasGameHelper.Create();
 
 			//Act
 			texasGame.Deal();
@@ -83,7 +76,7 @@ namespace Poker.Tests
 		public void TexasGameDealToTheEnd()
 		{
 			//Arrange
-			TexasGame texasGame = Create();
+			TexasGame texasGame = TexasGameHelper.Create();
 
 			//Act
 			DealToTheEnd(texasGame);

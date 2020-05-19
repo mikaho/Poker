@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Poker.Texas
 {
-	public class TexasHandSelector
+	public class TexasHandSelector : IHandSelector
 	{
 		private readonly Hand root;
 		public TexasHandSelector()

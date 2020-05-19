@@ -9,7 +9,7 @@ using System.Text;
 namespace Poker.Tests
 {
 	[TestClass]
-	[TestCategory("HandSelector")]
+	[TestCategory("Hand-Selector")]
 	public class TexasHandSelectorTests
 	{
 		[TestMethod]

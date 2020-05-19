@@ -1,4 +1,5 @@
 ﻿using Poker.Core;
+using Poker.Hands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,5 +101,10 @@ namespace Poker.Texas
 		{
 			return DealsLeft > 0;
 		}
+
+		private readonly TexasHandSelector handSelector = new TexasHandSelector();
+		public IHandSelector HandSelector => handSelector;
+
+
 	}
 }
