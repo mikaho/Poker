@@ -156,5 +156,79 @@ namespace Poker.Tests
 			Assert.AreEqual(5, ranks[1].Hand.CardsInTheHand[2].Value);
 			Assert.AreEqual(9, ranks[1].Hand.CardsInTheHand[4].Value);
 		}
+
+		[TestMethod]
+		public void TwoPlayersHaveingSharedPairHighCardWins()
+		{
+			//Arrange
+			List<Player> players = TestHelper.CreatePlayers();
+			TestHelper.AddCardsToPlayer(players, "Mika",
+				new Card(Suits.Clubes, "A"),
+				new Card(Suits.Hearts, "J"));
+
+			TestHelper.AddCardsToPlayer(players, "Masa",
+				new Card(Suits.Dimensions, "K"),
+				new Card(Suits.Spades, "J"));
+
+			List<Card> doardCards = new List<Card>
+			{
+				new Card(Suits.Dimensions, 2),
+				new Card(Suits.Clubes, 7),
+				new Card(Suits.Hearts, 5),
+				new Card(Suits.Spades, 7),
+				new Card(Suits.Hearts, 9)
+			};
+
+			//Act
+			HandCompare handCompare = new HandCompare(new TexasHandSelector());
+			IReadOnlyList<HandRank> ranks = handCompare.RankPlayerHands(players, doardCards);
+
+			//Assert
+			Assert.AreEqual(2, ranks.Count);
+			Assert.AreEqual(Constancts.HandRanks.Pair, ranks[0].Hand.Rank);
+			Assert.AreEqual(Constancts.HandRanks.Pair, ranks[1].Hand.Rank);
+			Assert.AreEqual(7, ranks[0].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual(14, ranks[0].Hand.CardsInTheHand[2].Value);
+			Assert.AreEqual(7, ranks[1].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual(13, ranks[1].Hand.CardsInTheHand[2].Value);
+		}
+
+		[TestMethod]
+		public void ThreePlayersDrawsBoardCardsWins()
+		{
+			//Arrange
+			List<Player> players = TestHelper.CreatePlayers(3);
+			TestHelper.AddCardsToPlayer(players, "Mika",
+				new Card(Suits.Clubes, "A"),
+				new Card(Suits.Clubes, "J"));
+
+			TestHelper.AddCardsToPlayer(players, "Masa",
+				new Card(Suits.Dimensions, "K"),
+				new Card(Suits.Spades, "J"));
+
+			TestHelper.AddCardsToPlayer(players, "Pirkko",
+				new Card(Suits.Dimensions, "Q"),
+				new Card(Suits.Spades, "T"));
+
+			List<Card> doardCards = new List<Card>
+			{
+				new Card(Suits.Hearts, 2),
+				new Card(Suits.Hearts, "T"),
+				new Card(Suits.Hearts, 5),
+				new Card(Suits.Hearts, 7),
+				new Card(Suits.Hearts, 9)
+			};
+
+			//Act
+			HandCompare handCompare = new HandCompare(new TexasHandSelector());
+			IReadOnlyList<HandRank> ranks = handCompare.RankPlayerHands(players, doardCards);
+
+			//Assert
+			Assert.AreEqual(1, ranks.Count);
+			Assert.AreEqual(3, ranks[0].Players.Count);
+			Assert.AreEqual(Constancts.HandRanks.Flush, ranks[0].Hand.Rank);
+			Assert.AreEqual(10, ranks[0].Hand.CardsInTheHand[0].Value);
+		}
+
 	}
 }
