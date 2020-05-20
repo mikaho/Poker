@@ -230,5 +230,33 @@ namespace Poker.Tests
 			Assert.AreEqual(10, ranks[0].Hand.CardsInTheHand[0].Value);
 		}
 
+		[TestMethod]
+		public void HandCompareThrowsExceptionWhenDuplicateCards()
+		{
+			//Arrange
+			List<Player> players = TestHelper.CreatePlayers();
+			TestHelper.AddCardsToPlayer(players, "Mika",
+				new Card(Suits.Clubes, "A"),
+				new Card(Suits.Clubes, "J"));
+
+			TestHelper.AddCardsToPlayer(players, "Masa",
+				new Card(Suits.Dimensions, "K"),
+				new Card(Suits.Clubes, "J"));
+
+			List<Card> doardCards = new List<Card>
+			{
+				new Card(Suits.Hearts, 2),
+				new Card(Suits.Hearts, "T"),
+				new Card(Suits.Hearts, 5),
+				new Card(Suits.Hearts, 7),
+				new Card(Suits.Hearts, 9)
+			};
+
+			//Act
+			HandCompare handCompare = new HandCompare(new TexasHandSelector());
+
+			//Assert
+			Assert.ThrowsException<InvalidOperationException>(() => handCompare.RankPlayerHands(players, doardCards));
+		}
 	}
 }
