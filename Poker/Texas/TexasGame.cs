@@ -17,7 +17,7 @@ namespace Poker.Texas
 		{
 			get
 			{
-				return DelasInTexas - NumberOfDeals;
+				return DelasInTexas - NumberOfDealsDone;
 			}
 		}
 
@@ -29,19 +29,19 @@ namespace Poker.Texas
 
 		public override void Deal()
 		{
-			if (NumberOfDeals == 0)
+			if (NumberOfDealsDone == 0)
 			{
 				DealPlayerCards();
 			}
-			else if (NumberOfDeals == 1)
+			else if (NumberOfDealsDone == 1)
 			{
 				DealFlop();
 			}
-			else if (NumberOfDeals == 2)
+			else if (NumberOfDealsDone == 2)
 			{
 				DealTurn();
 			}
-			else if (NumberOfDeals == 3)
+			else if (NumberOfDealsDone == 3)
 			{
 				DealRiver();
 			}

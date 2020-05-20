@@ -8,7 +8,7 @@ namespace Poker.Core
 {
 	public abstract class Game : AggregateRoot
 	{
-		protected int NumberOfDeals;
+		protected int NumberOfDealsDone;
 		protected Deck deck;
 
 		public Game(Deck deck)
@@ -48,7 +48,7 @@ namespace Poker.Core
 		public void IncrementNumberOfDeals()
 		{
 			if (DealsLeft > 0)
-				NumberOfDeals++;
+				NumberOfDealsDone++;
 		}
 	}
 }
