@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Poker.Core
 {
-	public class Card : ValueObject<Card>
+	public class Card : ValueObject<Card>, ICloneable
 	{
 		public Card(Suits suit, int value)
 		{
@@ -143,7 +143,12 @@ namespace Poker.Core
 
 		protected override int GetHashCodeCore()
 		{
-			return $"{Value}{Suit}".GetHashCode();
+			return $"{Suit}{Value}".GetHashCode();
+		}
+
+		public object Clone()
+		{
+			return new Card(Suit, Value); 
 		}
 	}
 }

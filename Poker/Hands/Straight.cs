@@ -8,8 +8,8 @@ namespace Poker.Hands
 {
 	public class Straight : Hand
 	{
-		public Straight(Hand next = null)
-			: base(Constancts.HandRanks.Straight, next)
+		public Straight()
+			: base(Constancts.HandRanks.Straight)
 		{
 		}
 
@@ -19,7 +19,7 @@ namespace Poker.Hands
 			ThrowIfDuplicate(cards);
 
 			if (cards.Count() < 5)
-				return Next(cards);
+				return null;
 
 			List<Card> pairs = cards.GroupBy(s => s.Value)
 				.Where(g => g.Count() == 2)
@@ -40,7 +40,7 @@ namespace Poker.Hands
 
 			List<Card> straight = HandHelper.ResolveStraight(cardsInStraight);
 			if (straight.Count != 5)
-				return Next(cards);
+				return null;
 
 			return CreateCopy<Straight>(straight);
 		}

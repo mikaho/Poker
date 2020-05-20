@@ -8,8 +8,8 @@ namespace Poker.Hands
 {
 	public class FourOfAKind : Hand
 	{
-		public FourOfAKind(Hand next = null)
-			: base(Constancts.HandRanks.FourOfAKind, next)
+		public FourOfAKind()
+			: base(Constancts.HandRanks.FourOfAKind)
 		{
 		}
 
@@ -18,12 +18,12 @@ namespace Poker.Hands
 			ThrowIfDuplicate(cards);
 
 			if (cards.Count() < 5)
-				return Next(cards);
+				return null;
 
 			List<Card> fourOfAKind = HandHelper.GetOfAKind(cards, 4);
 
 			if (fourOfAKind.Count != 4)
-				return Next(cards);
+				return null;
 
 			List<Card> highCards = HandHelper.GetHighCards(cards, fourOfAKind);
 

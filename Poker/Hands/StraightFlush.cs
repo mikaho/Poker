@@ -8,8 +8,8 @@ namespace Poker.Hands
 {
 	public class StraightFlush : Hand
 	{
-		public StraightFlush(Hand next = null)
-			: base(Constancts.HandRanks.StraightFlush, next)
+		public StraightFlush()
+			: base(Constancts.HandRanks.StraightFlush)
 		{
 		}
 
@@ -19,16 +19,16 @@ namespace Poker.Hands
 			ThrowIfDuplicate(cards);
 
 			if (cards.Count() < 5)
-				return Next(cards);
+				return null;
 
 			List<Card> cardsInSuit = HandHelper.GetSuitedCards(cards, 5, true);
 
 			if (cardsInSuit.Count < 5)
-				return Next(cards);
+				return null;
 
 			List<Card> straightFlushCards = HandHelper.ResolveStraight(cardsInSuit);
 			if (straightFlushCards.Count != 5)
-				return Next(cards);
+				return null;
 
 			return CreateCopy<StraightFlush>(straightFlushCards);
 		}

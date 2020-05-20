@@ -8,8 +8,8 @@ namespace Poker.Hands
 {
 	public class Pair : Hand
 	{
-		public Pair(Hand next = null)
-			: base(Constancts.HandRanks.Pair, next)
+		public Pair()
+			: base(Constancts.HandRanks.Pair)
 		{
 		}
 
@@ -18,12 +18,12 @@ namespace Poker.Hands
 			ThrowIfDuplicate(cards);
 
 			if (cards.Count() < 2)
-				return Next(cards);
+				return null;
 
 			List<Card> pair = HandHelper.GetOfAKind(cards, 2);
 
 			if (pair.Count != 2)
-				return Next(cards);
+				return null;
 
 			List<Card> highCards = HandHelper.GetHighCards(cards, pair);
 

@@ -8,9 +8,8 @@ namespace Poker.Hands
 {
 	public class Flush : Hand
 	{
-
-		public Flush(Hand next = null)
-			: base(Constancts.HandRanks.Flush, next)
+		public Flush()
+			: base(Constancts.HandRanks.Flush)
 		{
 		}
 
@@ -19,12 +18,12 @@ namespace Poker.Hands
 			ThrowIfDuplicate(cards);
 
 			if (cards.Count() < 5)
-				return Next(cards);
+				return null;
 
-			List<Card> cardsInSuit = HandHelper.GetSuitedCards(cards);
+			List <Card> cardsInSuit = HandHelper.GetSuitedCards(cards);
 
 			if (cardsInSuit.Count != 5)
-				return Next(cards);
+				return null;
 
 			return CreateCopy<Flush>(cardsInSuit);
 		}

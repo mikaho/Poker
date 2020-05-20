@@ -10,14 +10,11 @@ namespace Poker.Hands
 {
 	public abstract class Hand : Entity, IComparable<Hand>
 	{
-		private readonly Hand next;
-
 		private List<Card> cardsInHand = new List<Card>();
 		public IReadOnlyList<Card> CardsInTheHand => cardsInHand.ToList().AsReadOnly();
-		protected Hand(int rank, Hand next)
+		protected Hand(int rank)
 		{
 			Rank = rank;
-			this.next = next;
 		}
 
 		public int Rank { get; }
@@ -27,7 +24,7 @@ namespace Poker.Hands
 		protected T CreateCopy<T>(IEnumerable<Card> handCards)
 			where T : Hand
 		{
-			T hand = (T)Activator.CreateInstance(GetType(), next);
+			T hand = (T)Activator.CreateInstance(GetType());
 			hand.SetHandCards(handCards);
 			return hand;
 		}
@@ -41,14 +38,6 @@ namespace Poker.Hands
 		protected void ThrowIfDuplicate(IEnumerable<Card> cards)
 		{
 			HandHelper.ThrowIfDuplicate(cards);
-		}
-
-		protected Hand Next(IEnumerable<Card> cards)
-		{
-			if (next == null)
-				return null;
-
-			return next.IsMatch(cards);
 		}
 
 		public int CompareTo([NotNull] Hand other)

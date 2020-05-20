@@ -8,8 +8,8 @@ namespace Poker.Hands
 {
 	public class TreeOfAKind : Hand
 	{
-		public TreeOfAKind(Hand next = null)
-			: base(Constancts.HandRanks.ThreeOfAKind, next)
+		public TreeOfAKind()
+			: base(Constancts.HandRanks.ThreeOfAKind)
 		{
 		}
 
@@ -18,12 +18,12 @@ namespace Poker.Hands
 			ThrowIfDuplicate(cards);
 
 			if (cards.Count() < 5)
-				return Next(cards);
+				return null;
 
 			List<Card> threeOfAKind = HandHelper.GetOfAKind(cards, 3);
 
 			if (threeOfAKind.Count != 3)
-				return Next(cards);
+				return null;
 
 			List<Card> highCards = HandHelper.GetHighCards(cards, threeOfAKind);
 
