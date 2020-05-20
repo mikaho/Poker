@@ -9,9 +9,9 @@ namespace Poker.Ranks
 {
 	public class HandCompare
 	{
-		private readonly IHandSelector handSelector;
+		private readonly HandSelector handSelector;
 
-		public HandCompare(IHandSelector handSelector)
+		public HandCompare(HandSelector handSelector)
 		{
 			this.handSelector = handSelector;
 		}

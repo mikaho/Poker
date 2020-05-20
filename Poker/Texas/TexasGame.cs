@@ -103,7 +103,7 @@ namespace Poker.Texas
 		}
 
 		private readonly TexasHandSelector handSelector = new TexasHandSelector();
-		public IHandSelector HandSelector => handSelector;
+		public HandSelector HandSelector => handSelector;
 
 
 	}
