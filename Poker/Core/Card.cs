@@ -54,28 +54,6 @@ namespace Poker.Core
 		public Suits Suit { get; }
 		public int Value { get; }
 
-		//public int CompareTo([NotNull] Card other)
-		//{
-		//	return other.Value.CompareTo(Value);
-		//}
-
-		//public override bool Equals(object obj)
-		//{
-		//	Card cardToCompare = obj as Card;
-		//	if (cardToCompare == null)
-		//		return false;
-
-		//	return this.Value == cardToCompare.Value &&
-		//		this.Suit == cardToCompare.Suit;
-		//}
-
-		//public override int GetHashCode()
-		//{
-		//	//TODO: Fix
-		//	return base.GetHashCode();
-		//}
-
-
 		public override string ToString()
 		{
 			string valueInString = ValueToString();

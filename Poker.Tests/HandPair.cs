@@ -51,7 +51,7 @@ namespace Poker.Tests
 			Pair pair = new Pair();
 
 			//Assert
-			Assert.IsNotNull(pair.IsMatch(cards));
+			Assert.IsFalse(pair.IsMatch(cards).HasValue);
 		}
 
 		[TestMethod]
