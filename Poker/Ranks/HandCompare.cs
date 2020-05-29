@@ -1,4 +1,5 @@
-﻿using Poker.Core;
+﻿using Poker.Common;
+using Poker.Core;
 using Poker.Hands;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,11 @@ namespace Poker.Ranks
 				List<Card> cards = new List<Card>(player.Cards);
 				cards.AddRange(doardCards);
 
-				Hand hand = handSelector.SelectBest(cards).Value;
-				hands.Add(player, hand);
+				Maybe<Hand> hand = handSelector.SelectBest(cards);
+				if (!hand.HasValue)
+					throw new InvalidOperationException("Hand not ranked.");
+
+				hands.Add(player, hand.Value);
 			}
 
 			List<HandRank> handRanks = new List<HandRank>();
