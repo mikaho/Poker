@@ -26,7 +26,7 @@ namespace Poker.Tests
 
 			//Act
 			HighCard h = new HighCard();
-			Hand highCard = h.IsMatch(cards);
+			Hand highCard = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(highCard);

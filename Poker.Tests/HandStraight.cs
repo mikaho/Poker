@@ -26,7 +26,7 @@ namespace Poker.Tests
 
 			//Act
 			Straight h = new Straight();
-			Hand straight = h.IsMatch(cards);
+			Hand straight = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(straight);
@@ -53,7 +53,7 @@ namespace Poker.Tests
 
 			//Act
 			Straight h = new Straight();
-			Hand straight = h.IsMatch(cards);
+			Hand straight = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(straight);
@@ -80,7 +80,7 @@ namespace Poker.Tests
 			Straight straight = new Straight();
 
 			//Assert
-			Assert.IsNull(straight.IsMatch(cards));
+			Assert.IsFalse(straight.IsMatch(cards).HasValue);
 		}
 
 		[TestMethod]
@@ -98,7 +98,7 @@ namespace Poker.Tests
 
 			//Act
 			Straight h = new Straight();
-			Hand straight = h.IsMatch(cards);
+			Hand straight = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(straight);
@@ -123,7 +123,7 @@ namespace Poker.Tests
 
 			//Act
 			Straight h = new Straight();
-			Hand straight = h.IsMatch(cards);
+			Hand straight = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(straight);

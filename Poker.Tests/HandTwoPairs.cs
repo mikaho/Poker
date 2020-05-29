@@ -26,7 +26,7 @@ namespace Poker.Tests
 
 			//Act
 			TwoPairs h = new TwoPairs();
-			Hand twoPairs = h.IsMatch(cards);
+			Hand twoPairs = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(twoPairs);
@@ -51,10 +51,10 @@ namespace Poker.Tests
 			cards.Add(new Card(Suits.Hearts, "J"));
 
 			//Act
-			TwoPairs threeOfAKind = new TwoPairs();
+			TwoPairs twoPairs = new TwoPairs();
 
 			//Assert
-			Assert.IsNull(threeOfAKind.IsMatch(cards));
+			Assert.IsFalse(twoPairs.IsMatch(cards).HasValue);
 		}
 
 		[TestMethod]

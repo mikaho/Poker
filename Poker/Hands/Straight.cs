@@ -1,4 +1,5 @@
-﻿using Poker.Core;
+﻿using Poker.Common;
+using Poker.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,12 @@ namespace Poker.Hands
 		}
 
 
-		public override Hand IsMatch(IEnumerable<Card> cards)
+		public override Maybe<Hand> IsMatch(IEnumerable<Card> cards)
 		{
 			ThrowIfDuplicate(cards);
 
 			if (cards.Count() < 5)
-				return null;
+				return Maybe<Hand>.None;
 
 			List<Card> pairs = cards.GroupBy(s => s.Value)
 				.Where(g => g.Count() == 2)
@@ -40,9 +41,9 @@ namespace Poker.Hands
 
 			List<Card> straight = HandHelper.ResolveStraight(cardsInStraight);
 			if (straight.Count != 5)
-				return null;
+				return Maybe<Hand>.None;
 
-			return CreateCopy<Straight>(straight);
+			return CreateCopy<Hand>(straight);
 		}
 	}
 }

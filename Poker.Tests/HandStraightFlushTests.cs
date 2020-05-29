@@ -26,7 +26,7 @@ namespace Poker.Tests
 
 			//Act
 			StraightFlush h = new StraightFlush();
-			Hand straightFlush = h.IsMatch(cards);
+			Hand straightFlush = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(straightFlush);
@@ -49,7 +49,7 @@ namespace Poker.Tests
 			
 			//Act
 			StraightFlush h = new StraightFlush();
-			Hand straightFlush = h.IsMatch(cards);
+			Hand straightFlush = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(straightFlush);
@@ -73,7 +73,7 @@ namespace Poker.Tests
 
 			//Act
 			StraightFlush h = new StraightFlush();
-			Hand straightFlush = h.IsMatch(cards);
+			Hand straightFlush = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(straightFlush);
@@ -97,7 +97,7 @@ namespace Poker.Tests
 
 			//Act
 			StraightFlush h = new StraightFlush();
-			Hand straightFlush = h.IsMatch(cards);
+			Hand straightFlush = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(straightFlush);
@@ -122,7 +122,7 @@ namespace Poker.Tests
 
 			//Act
 			StraightFlush h = new StraightFlush();
-			Hand straightFlush = h.IsMatch(cards);
+			Hand straightFlush = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(straightFlush);
@@ -149,7 +149,7 @@ namespace Poker.Tests
 			StraightFlush straightFlush = new StraightFlush();
 
 			//Assert
-			Assert.IsNull(straightFlush.IsMatch(cards));
+			Assert.IsFalse(straightFlush.IsMatch(cards).HasValue);
 		}
 
 		[TestMethod]

@@ -27,7 +27,7 @@ namespace Poker.Tests
 
 			//Act
 			TexasHandSelector handSelector = new TexasHandSelector();
-			Hand straight = handSelector.SelectBest(cards);
+			Hand straight = handSelector.SelectBest(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(straight);
@@ -52,7 +52,7 @@ namespace Poker.Tests
 
 			//Act
 			TexasHandSelector handSelector = new TexasHandSelector();
-			Hand flush = handSelector.SelectBest(cards);
+			Hand flush = handSelector.SelectBest(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(flush.IsMatch(cards));
@@ -77,7 +77,7 @@ namespace Poker.Tests
 
 			//Act
 			TexasHandSelector handSelector = new TexasHandSelector();
-			Hand fourOfAKind = handSelector.SelectBest(cards);
+			Hand fourOfAKind = handSelector.SelectBest(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(fourOfAKind.IsMatch(cards));
@@ -101,7 +101,7 @@ namespace Poker.Tests
 
 			//Act
 			TexasHandSelector handSelector = new TexasHandSelector();
-			Hand fullHouse = handSelector.SelectBest(cards);
+			Hand fullHouse = handSelector.SelectBest(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(fullHouse.IsMatch(cards));
@@ -126,7 +126,7 @@ namespace Poker.Tests
 
 			//Act
 			TexasHandSelector handSelector = new TexasHandSelector();
-			Hand highCard = handSelector.SelectBest(cards);
+			Hand highCard = handSelector.SelectBest(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(highCard.IsMatch(cards));
@@ -154,7 +154,7 @@ namespace Poker.Tests
 
 			//Act
 			TexasHandSelector handSelector = new TexasHandSelector();
-			Hand pair = handSelector.SelectBest(cards);
+			Hand pair = handSelector.SelectBest(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(pair.IsMatch(cards));
@@ -182,7 +182,7 @@ namespace Poker.Tests
 
 			//Act
 			TexasHandSelector handSelector = new TexasHandSelector();
-			Hand straightFlush = handSelector.SelectBest(cards);
+			Hand straightFlush = handSelector.SelectBest(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(straightFlush.IsMatch(cards));
@@ -207,7 +207,7 @@ namespace Poker.Tests
 
 			//Act
 			TexasHandSelector handSelector = new TexasHandSelector();
-			Hand threeOfAKind = handSelector.SelectBest(cards);
+			Hand threeOfAKind = handSelector.SelectBest(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(threeOfAKind.IsMatch(cards));
@@ -232,7 +232,7 @@ namespace Poker.Tests
 
 			//Act
 			TexasHandSelector handSelector = new TexasHandSelector();
-			Hand twoPairs = handSelector.SelectBest(cards);
+			Hand twoPairs = handSelector.SelectBest(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(twoPairs.IsMatch(cards));

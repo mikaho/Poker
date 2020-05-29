@@ -26,7 +26,7 @@ namespace Poker.Tests
 
 			//Act
 			Pair h = new Pair();
-			Hand pair = h.IsMatch(cards);
+			Hand pair = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(pair);
@@ -71,7 +71,7 @@ namespace Poker.Tests
 			Pair pair = new Pair();
 
 			//Assert
-			Assert.IsNull(pair.IsMatch(cards));
+			Assert.IsFalse(pair.IsMatch(cards).HasValue);
 		}
 
 		[TestMethod]

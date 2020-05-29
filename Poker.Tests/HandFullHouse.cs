@@ -26,7 +26,8 @@ namespace Poker.Tests
 
 			//Act
 			FullHouse h = new FullHouse();
-			Hand fullHouse = h.IsMatch(cards);
+			Hand fullHouse = h.IsMatch(cards).Value;
+
 			//Assert
 			Assert.IsNotNull(fullHouse);
 			Assert.AreEqual(5, fullHouse.CardsInTheHand.Count);
@@ -52,7 +53,7 @@ namespace Poker.Tests
 			FullHouse fullHouse = new FullHouse();
 
 			//Assert
-			Assert.IsNull(fullHouse.IsMatch(cards));
+			Assert.IsFalse(fullHouse.IsMatch(cards).HasValue);
 		}
 
 		[TestMethod]

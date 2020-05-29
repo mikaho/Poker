@@ -19,14 +19,14 @@ namespace Poker.Hands
 
 		public int Rank { get; }
 
-		public abstract Hand IsMatch(IEnumerable<Card> cards);
+		public abstract Maybe<Hand> IsMatch(IEnumerable<Card> cards);
 
-		protected T CreateCopy<T>(IEnumerable<Card> handCards)
+		protected Maybe<T> CreateCopy<T>(IEnumerable<Card> handCards)
 			where T : Hand
 		{
 			T hand = (T)Activator.CreateInstance(GetType());
 			hand.SetHandCards(handCards);
-			return hand;
+			return Maybe<T>.Some(hand);
 		}
 
 		private void SetHandCards(IEnumerable<Card> handCards)

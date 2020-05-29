@@ -26,7 +26,7 @@ namespace Poker.Tests
 
 			//Act
 			Flush h = new Flush();
-			Hand flush = h.IsMatch(cards);
+			Hand flush = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(flush);
@@ -54,7 +54,7 @@ namespace Poker.Tests
 			Flush flush = new Flush();
 
 			//Assert
-			Assert.IsNull(flush.IsMatch(cards));
+			Assert.IsFalse(flush.IsMatch(cards).HasValue);
 		}
 
 		[TestMethod]

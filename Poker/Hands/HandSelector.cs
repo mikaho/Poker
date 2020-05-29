@@ -1,4 +1,5 @@
-﻿using Poker.Core;
+﻿using Poker.Common;
+using Poker.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,17 +11,16 @@ namespace Poker.Hands
 	{
 		protected readonly List<Hand> hands = new List<Hand>();
 
-		public Hand SelectBest(IEnumerable<Card> cards)
+		public Maybe<Hand> SelectBest(IEnumerable<Card> cards)
 		{
-			Hand found = null;
 			foreach (var hand in hands)
 			{
-				found = hand.IsMatch(cards);
-				if (found != null)
+				Maybe<Hand> found = hand.IsMatch(cards);
+				if (found.HasValue)
 					return found;
 			}
 
-			return found;
+			return Maybe<Hand>.None;
 		}
 	}
 }

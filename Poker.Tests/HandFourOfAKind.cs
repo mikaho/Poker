@@ -26,7 +26,7 @@ namespace Poker.Tests
 
 			//Act
 			FourOfAKind h = new FourOfAKind();
-			Hand fourOfAKind = h.IsMatch(cards);
+			Hand fourOfAKind = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(fourOfAKind);
@@ -52,7 +52,7 @@ namespace Poker.Tests
 			FourOfAKind fourOfAKind = new FourOfAKind();
 
 			//Assert
-			Assert.IsNull(fourOfAKind.IsMatch(cards));
+			Assert.IsFalse(fourOfAKind.IsMatch(cards).HasValue);
 		}
 
 		[TestMethod]

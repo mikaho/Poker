@@ -26,7 +26,7 @@ namespace Poker.Ranks
 				List<Card> cards = new List<Card>(player.Cards);
 				cards.AddRange(doardCards);
 
-				Hand hand = handSelector.SelectBest(cards);
+				Hand hand = handSelector.SelectBest(cards).Value;
 				hands.Add(player, hand);
 			}
 

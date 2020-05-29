@@ -1,4 +1,5 @@
-﻿using Poker.Core;
+﻿using Poker.Common;
+using Poker.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,24 +14,24 @@ namespace Poker.Hands
 		{
 		}
 
-		public override Hand IsMatch(IEnumerable<Card> cards)
+		public override Maybe<Hand> IsMatch(IEnumerable<Card> cards)
 		{
 			ThrowIfDuplicate(cards);
 
 			if (cards.Count() < 5)
-				return null;
+				return Maybe<Hand>.None;
 
 			List<Card> fourOfAKind = HandHelper.GetOfAKind(cards, 4);
 
 			if (fourOfAKind.Count != 4)
-				return null;
+				return Maybe<Hand>.None;
 
 			List<Card> highCards = HandHelper.GetHighCards(cards, fourOfAKind);
 
 			List<Card> finalCards = new List<Card>(fourOfAKind);
 			finalCards.Add(highCards.First());
 
-			return CreateCopy<FourOfAKind>(finalCards);
+			return CreateCopy<Hand>(finalCards);
 		}
 
 		

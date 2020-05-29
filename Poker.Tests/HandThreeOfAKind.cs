@@ -26,7 +26,7 @@ namespace Poker.Tests
 
 			//Act
 			TreeOfAKind h = new TreeOfAKind();
-			Hand threeOfAKind = h.IsMatch(cards);
+			Hand threeOfAKind = h.IsMatch(cards).Value;
 
 			//Assert
 			Assert.IsNotNull(threeOfAKind);
@@ -53,7 +53,7 @@ namespace Poker.Tests
 			TreeOfAKind threeOfAKind = new TreeOfAKind();
 
 			//Assert
-			Assert.IsNull(threeOfAKind.IsMatch(cards));
+			Assert.IsFalse(threeOfAKind.IsMatch(cards).HasValue);
 		}
 
 		[TestMethod]

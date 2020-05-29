@@ -1,4 +1,5 @@
-﻿using Poker.Core;
+﻿using Poker.Common;
+using Poker.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +14,17 @@ namespace Poker.Hands
 		{
 		}
 
-		public override Hand IsMatch(IEnumerable<Card> cards)
+		public override Maybe<Hand> IsMatch(IEnumerable<Card> cards)
 		{
 			ThrowIfDuplicate(cards);
 
 			if (cards.Count() < 5)
-				return null;
+				return Maybe<Hand>.None;
 
 			List<Card> treeOfAKind = HandHelper.GetOfAKind(cards, 3); ;
 
 			if (treeOfAKind.Count != 3)
-				return null;
+				return Maybe<Hand>.None;
 
 			List<Card> remainingCard = cards.ToList()
 				.FindAll(c => c.Value != treeOfAKind.First().Value);
@@ -31,12 +32,12 @@ namespace Poker.Hands
 			List<Card> pair = HandHelper.GetOfAKind(remainingCard, 2);
 
 			if (pair.Count != 2)
-				return null;
+				return Maybe<Hand>.None;
 
 			List<Card> finalCards = new List<Card>(treeOfAKind);
 			finalCards.AddRange(pair);
 
-			return CreateCopy<FullHouse>(finalCards);
+			return CreateCopy<Hand>(finalCards);
 		}
 	}
 }
