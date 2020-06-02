@@ -10,8 +10,16 @@ namespace Poker.Core
 	{
 		public Card(Suits suit, int value)
 		{
+			ThrowIfValueOutOfRange(value);
+
 			Suit = suit;
 			Value = value;
+		}
+
+		private static void ThrowIfValueOutOfRange(int value)
+		{
+			if (!(value >= 1 && value <= 14))
+				throw new ArgumentOutOfRangeException("Card value");
 		}
 
 		public Card(Suits suit, string value)
@@ -67,19 +75,19 @@ namespace Poker.Core
 			string suitInString = null;
 			if (Suit == Suits.Hearts)
 			{
-				suitInString = "\u2764";
+				suitInString = "❤";
 			}
 			else if (Suit == Suits.Dimensions)
 			{
-				suitInString = "\u2666";
+				suitInString = "♦";
 			}
 			else if (Suit == Suits.Spades)
 			{
-				suitInString = "\u2660";
+				suitInString = "♠";
 			}
 			else if (Suit == Suits.Clubes)
 			{
-				suitInString = "\u2663";
+				suitInString = "♣";
 			}
 
 			return suitInString;
@@ -104,6 +112,7 @@ namespace Poker.Core
 					valueInString = "K";
 					break;
 				case 14:
+				case 1:
 					valueInString = "A";
 					break;
 				default:

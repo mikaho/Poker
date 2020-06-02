@@ -44,7 +44,8 @@ namespace Poker.Hands
 				Card firstCard = straightCards.First();
 				if (firstCard.Value == 5)
 				{
-					straightCards.Add(ace);
+					Card lowValueAce = new Card(ace.Suit, 1);
+					straightCards.Add(lowValueAce);
 				}
 				else if (firstCard.Value == 13)
 				{

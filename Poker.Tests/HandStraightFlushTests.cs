@@ -55,7 +55,8 @@ namespace Poker.Tests
 			Assert.IsNotNull(straightFlush);
 			Assert.AreEqual(5, straightFlush.CardsInTheHand.Count);
 			Assert.AreEqual(5, straightFlush.CardsInTheHand[0].Value);
-			Assert.AreEqual(14, straightFlush.CardsInTheHand[4].Value);
+			Assert.AreEqual(1, straightFlush.CardsInTheHand[4].Value);
+			Assert.AreEqual("❤A", straightFlush.CardsInTheHand[4].ToString());
 		}
 
 		[TestMethod]
