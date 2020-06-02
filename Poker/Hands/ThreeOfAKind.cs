@@ -34,6 +34,10 @@ namespace Poker.Hands
 			return CreateCopy<Hand>(finalCards);
 		}
 
-		
+		public override void SetHandName()
+		{
+			string cardName = HandNameHelper.CardName(CardsInTheHand.First());
+			HandName = $"Kolme samaa - {cardName}";
+		}
 	}
 }

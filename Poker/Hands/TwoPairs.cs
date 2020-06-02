@@ -36,5 +36,12 @@ namespace Poker.Hands
 
 			return CreateCopy<Hand>(finalCards);
 		}
+
+		public override void SetHandName()
+		{
+			string highPair = HandNameHelper.CardName(CardsInTheHand.First());
+			string lowPair = HandNameHelper.CardName(CardsInTheHand.Skip(2).First());
+			HandName = $"Kaksi paria - {highPair} ja {lowPair}";
+		}
 	}
 }

@@ -28,5 +28,11 @@ namespace Poker.Hands
 
 			return CreateCopy<Hand>(cardsInSuit);
 		}
+
+		public override void SetHandName()
+		{
+			string cardName = HandNameHelper.HighCardName(CardsInTheHand.First());
+			HandName = $"Suora - Korkea kortti {cardName}";
+		}
 	}
 }

@@ -39,5 +39,12 @@ namespace Poker.Hands
 
 			return CreateCopy<Hand>(finalCards);
 		}
+
+		public override void SetHandName()
+		{
+			string threeOfAKind = HandNameHelper.CardName(CardsInTheHand.First());
+			string pair = HandNameHelper.CardName(CardsInTheHand.Skip(3).First());
+			HandName = $"Täysikäsi - {threeOfAKind} ja {pair}";
+		}
 	}
 }

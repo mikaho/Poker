@@ -18,8 +18,11 @@ namespace Poker.Hands
 		}
 
 		public int Rank { get; }
+		public string HandName { get; protected set; }
 
 		public abstract Maybe<Hand> IsMatch(IEnumerable<Card> cards);
+
+		public abstract void SetHandName();
 
 		protected Maybe<T> CreateCopy<T>(IEnumerable<Card> handCards)
 			where T : Hand
@@ -33,6 +36,7 @@ namespace Poker.Hands
 		{
 			cardsInHand.Clear();
 			cardsInHand.AddRange(handCards);
+			SetHandName();
 		}
 
 		protected void ThrowIfDuplicate(IEnumerable<Card> cards)
@@ -63,6 +67,14 @@ namespace Poker.Hands
 			{
 				return Rank.CompareTo(other.Rank);
 			}
+		}
+
+		public override string ToString()
+		{
+			if (string.IsNullOrEmpty(HandName))
+				return string.Empty;
+
+			return HandName;
 		}
 	}
 }
