@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
 
 namespace Poker.Core
@@ -28,7 +29,7 @@ namespace Poker.Core
 			Value = StringToValue(value);
 		}
 
-		private int StringToValue(string value)
+		private static int StringToValue(string value)
 		{
 			int numericValue = 0;
 			if (value.Length != 1)
@@ -102,6 +103,23 @@ namespace Poker.Core
 		public object Clone()
 		{
 			return new Card(Suit, Value); 
+		}
+
+		public static Card FromSymbol(string symbol)
+		{
+			if (string.IsNullOrEmpty(symbol))
+				throw new ArgumentNullException("Symbol");
+
+			if (symbol.Length != 2)
+				throw new ArgumentNullException("Symbol");
+
+			string suitsInString = symbol.Substring(0, 1);
+			string valueInString = symbol.Substring(1, 1);
+
+			Suits suit = Suits.GetAll<Suits>().First(s => s.Symbol == suitsInString);
+			int value = StringToValue(valueInString);
+
+			return new Card(suit, value);
 		}
 	}
 }

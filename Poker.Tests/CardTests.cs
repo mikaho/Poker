@@ -48,5 +48,19 @@ namespace Poker.Tests
 			Assert.AreEqual(1, card.Value);
 			Assert.AreEqual("♠A", card.ToString());
 		}
+
+		[TestMethod]
+		public void CardAceFromSymbol()
+		{
+			//Arrange
+			Card card = Card.FromSymbol("♠A");
+
+			//Act
+
+			//Assert
+			Assert.AreEqual(14, card.Value);
+			Assert.AreEqual(Suits.Spades, card.Suit);
+			Assert.AreEqual("♠A", card.ToString());
+		}
 	}
 }
