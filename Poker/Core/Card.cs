@@ -52,7 +52,8 @@ namespace Poker.Core
 					numericValue = 14;
 					break;
 				default:
-					int.TryParse(value, out numericValue);
+					if (!int.TryParse(value, out numericValue))
+						throw new ArgumentOutOfRangeException("Card value");
 					break;
 			}
 
@@ -65,62 +66,27 @@ namespace Poker.Core
 		public override string ToString()
 		{
 			string valueInString = ValueToString();
-			string suitInString = SuitToString();
-
-			return $"{suitInString}{valueInString}";
-		}
-
-		private string SuitToString()
-		{
-			string suitInString = null;
-			if (Suit == Suits.Hearts)
-			{
-				suitInString = "❤";
-			}
-			else if (Suit == Suits.Dimensions)
-			{
-				suitInString = "♦";
-			}
-			else if (Suit == Suits.Spades)
-			{
-				suitInString = "♠";
-			}
-			else if (Suit == Suits.Clubes)
-			{
-				suitInString = "♣";
-			}
-
-			return suitInString;
+			return $"{Suit.Symbol}{valueInString}";
 		}
 
 		private string ValueToString()
 		{
-			string valueInString = null;
 			switch (Value)
 			{
-				
 				case 10:
-					valueInString = "T";
-					break;
+					return "T";
 				case 11:
-					valueInString = "J";
-					break;
+					return "J";
 				case 12:
-					valueInString = "Q";
-					break;
+					return "Q";
 				case 13:
-					valueInString = "K";
-					break;
+					return "K";
 				case 14:
 				case 1:
-					valueInString = "A";
-					break;
+					return "A";
 				default:
-					valueInString = Value.ToString();
-					break;
+					return Value.ToString();
 			}
-
-			return valueInString;
 		}
 
 		protected override bool EqualsCore(Card other)
