@@ -31,11 +31,11 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(pair);
 			Assert.AreEqual(5, pair.CardsInTheHand.Count);
-			Assert.AreEqual(7, pair.CardsInTheHand[0].Value);
-			Assert.AreEqual(7, pair.CardsInTheHand[1].Value);
-			Assert.AreEqual(14, pair.CardsInTheHand[2].Value);
-			Assert.AreEqual(13, pair.CardsInTheHand[3].Value);
-			Assert.AreEqual(9, pair.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(7, pair.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(7, pair.CardsInTheHand[1].Value);
+			Assert.AreEqual<int>(14, pair.CardsInTheHand[2].Value);
+			Assert.AreEqual<int>(13, pair.CardsInTheHand[3].Value);
+			Assert.AreEqual<int>(9, pair.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.Pair, pair.Rank);
 		}
 

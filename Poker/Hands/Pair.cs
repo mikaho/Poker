@@ -36,7 +36,7 @@ namespace Poker.Hands
 
 		public override void SetHandName()
 		{
-			string cardName = HandNameHelper.CardName(CardsInTheHand.First());
+			string cardName = CardsInTheHand.First().Value.ValueName();
 			HandName = $"Pari - {cardName}";
 		}
 	}

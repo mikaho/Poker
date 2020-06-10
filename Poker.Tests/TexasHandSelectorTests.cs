@@ -32,8 +32,8 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(straight);
 			Assert.AreEqual(5, straight.CardsInTheHand.Count);
-			Assert.AreEqual(10, straight.CardsInTheHand[0].Value);
-			Assert.AreEqual(6, straight.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(10, straight.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(6, straight.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.Straight, straight.Rank);
 		}
 
@@ -57,8 +57,8 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(flush.IsMatch(cards));
 			Assert.AreEqual(5, flush.CardsInTheHand.Count);
-			Assert.AreEqual(12, flush.CardsInTheHand[0].Value);
-			Assert.AreEqual(5, flush.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(12, flush.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(5, flush.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.Flush, flush.Rank);
 		}
 
@@ -82,7 +82,7 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(fourOfAKind.IsMatch(cards));
 			Assert.AreEqual(5, fourOfAKind.CardsInTheHand.Count);
-			Assert.AreEqual(14, fourOfAKind.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(14, fourOfAKind.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.FourOfAKind, fourOfAKind.Rank);
 		}
 
@@ -106,8 +106,8 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(fullHouse.IsMatch(cards));
 			Assert.AreEqual(5, fullHouse.CardsInTheHand.Count);
-			Assert.AreEqual(3, fullHouse.CardsInTheHand[0].Value);
-			Assert.AreEqual(14, fullHouse.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(3, fullHouse.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(14, fullHouse.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.FullHouse, fullHouse.Rank);
 		}
 
@@ -131,11 +131,11 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(highCard.IsMatch(cards));
 			Assert.AreEqual(5, highCard.CardsInTheHand.Count);
-			Assert.AreEqual(14, highCard.CardsInTheHand[0].Value);
-			Assert.AreEqual(13, highCard.CardsInTheHand[1].Value);
-			Assert.AreEqual(9, highCard.CardsInTheHand[2].Value);
-			Assert.AreEqual(7, highCard.CardsInTheHand[3].Value);
-			Assert.AreEqual(6, highCard.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(14, highCard.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(13, highCard.CardsInTheHand[1].Value);
+			Assert.AreEqual<int>(9, highCard.CardsInTheHand[2].Value);
+			Assert.AreEqual<int>(7, highCard.CardsInTheHand[3].Value);
+			Assert.AreEqual<int>(6, highCard.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.HighCard, highCard.Rank);
 		}
 
@@ -159,11 +159,11 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(pair.IsMatch(cards));
 			Assert.AreEqual(5, pair.CardsInTheHand.Count);
-			Assert.AreEqual(7, pair.CardsInTheHand[0].Value);
-			Assert.AreEqual(7, pair.CardsInTheHand[1].Value);
-			Assert.AreEqual(14, pair.CardsInTheHand[2].Value);
-			Assert.AreEqual(13, pair.CardsInTheHand[3].Value);
-			Assert.AreEqual(9, pair.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(7, pair.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(7, pair.CardsInTheHand[1].Value);
+			Assert.AreEqual<int>(14, pair.CardsInTheHand[2].Value);
+			Assert.AreEqual<int>(13, pair.CardsInTheHand[3].Value);
+			Assert.AreEqual<int>(9, pair.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.Pair, pair.Rank);
 		}
 
@@ -187,8 +187,8 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(straightFlush.IsMatch(cards));
 			Assert.AreEqual(5, straightFlush.CardsInTheHand.Count);
-			Assert.AreEqual(6, straightFlush.CardsInTheHand[0].Value);
-			Assert.AreEqual(2, straightFlush.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(6, straightFlush.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(2, straightFlush.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.StraightFlush, straightFlush.Rank);
 		}
 
@@ -212,8 +212,8 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(threeOfAKind.IsMatch(cards));
 			Assert.AreEqual(5, threeOfAKind.CardsInTheHand.Count);
-			Assert.AreEqual(14, threeOfAKind.CardsInTheHand[3].Value);
-			Assert.AreEqual(13, threeOfAKind.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(14, threeOfAKind.CardsInTheHand[3].Value);
+			Assert.AreEqual<int>(13, threeOfAKind.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.ThreeOfAKind, threeOfAKind.Rank);
 		}
 
@@ -237,9 +237,9 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(twoPairs.IsMatch(cards));
 			Assert.AreEqual(5, twoPairs.CardsInTheHand.Count);
-			Assert.AreEqual(3, twoPairs.CardsInTheHand[0].Value);
-			Assert.AreEqual(2, twoPairs.CardsInTheHand[2].Value);
-			Assert.AreEqual(14, twoPairs.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(3, twoPairs.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(2, twoPairs.CardsInTheHand[2].Value);
+			Assert.AreEqual<int>(14, twoPairs.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.TwoPairs, twoPairs.Rank);
 		}
 	}

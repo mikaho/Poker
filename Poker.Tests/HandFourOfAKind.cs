@@ -31,7 +31,7 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(fourOfAKind);
 			Assert.AreEqual(5, fourOfAKind.CardsInTheHand.Count);
-			Assert.AreEqual(14, fourOfAKind.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(14, fourOfAKind.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.FourOfAKind, fourOfAKind.Rank);
 		}
 

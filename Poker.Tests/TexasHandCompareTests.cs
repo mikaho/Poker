@@ -44,9 +44,9 @@ namespace Poker.Tests
 			Assert.AreEqual(1, ranks[0].Position);
 			Assert.AreEqual(2, ranks[1].Position);
 			Assert.AreEqual(Constancts.HandRanks.Straight, ranks[0].Hand.Rank);
-			Assert.AreEqual(Constancts.CardValues.Jack, ranks[0].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(Constancts.CardValues.Jack, ranks[0].Hand.CardsInTheHand[0].Value);
 			Assert.AreEqual(Constancts.HandRanks.HighCard, ranks[1].Hand.Rank);
-			Assert.AreEqual(Constancts.CardValues.Ace, ranks[1].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(Constancts.CardValues.Ace, ranks[1].Hand.CardsInTheHand[0].Value);
 		}
 
 
@@ -80,9 +80,9 @@ namespace Poker.Tests
 			Assert.AreEqual(1, ranks[0].Players.Count);
 			Assert.AreEqual(1, ranks[1].Players.Count);
 			Assert.AreEqual(Constancts.HandRanks.FullHouse, ranks[0].Hand.Rank);
-			Assert.AreEqual(Constancts.CardValues.King, ranks[0].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(Constancts.CardValues.King, ranks[0].Hand.CardsInTheHand[0].Value);
 			Assert.AreEqual(Constancts.HandRanks.Straight, ranks[1].Hand.Rank);
-			Assert.AreEqual(Constancts.CardValues.Ace, ranks[1].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(Constancts.CardValues.Ace, ranks[1].Hand.CardsInTheHand[0].Value);
 		}
 
 		[TestMethod]
@@ -115,8 +115,8 @@ namespace Poker.Tests
 			Assert.AreEqual(1, ranks.Count);
 			Assert.AreEqual(2, ranks[0].Players.Count);
 			Assert.AreEqual(Constancts.HandRanks.FourOfAKind, ranks[0].Hand.Rank);
-			Assert.AreEqual(2, ranks[0].Hand.CardsInTheHand[0].Value);
-			Assert.AreEqual(Constancts.CardValues.Ace, ranks[0].Hand.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(2, ranks[0].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(Constancts.CardValues.Ace, ranks[0].Hand.CardsInTheHand[4].Value);
 		}
 
 		[TestMethod]
@@ -149,12 +149,12 @@ namespace Poker.Tests
 			Assert.AreEqual(2, ranks.Count);
 			Assert.AreEqual(Constancts.HandRanks.TwoPairs, ranks[0].Hand.Rank);
 			Assert.AreEqual(Constancts.HandRanks.TwoPairs, ranks[1].Hand.Rank);
-			Assert.AreEqual(13, ranks[0].Hand.CardsInTheHand[0].Value);
-			Assert.AreEqual(5, ranks[0].Hand.CardsInTheHand[2].Value);
-			Assert.AreEqual(9, ranks[0].Hand.CardsInTheHand[4].Value);
-			Assert.AreEqual(11, ranks[1].Hand.CardsInTheHand[0].Value);
-			Assert.AreEqual(5, ranks[1].Hand.CardsInTheHand[2].Value);
-			Assert.AreEqual(9, ranks[1].Hand.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(13, ranks[0].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(5, ranks[0].Hand.CardsInTheHand[2].Value);
+			Assert.AreEqual<int>(9, ranks[0].Hand.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(11, ranks[1].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(5, ranks[1].Hand.CardsInTheHand[2].Value);
+			Assert.AreEqual<int>(9, ranks[1].Hand.CardsInTheHand[4].Value);
 		}
 
 		[TestMethod]
@@ -187,10 +187,10 @@ namespace Poker.Tests
 			Assert.AreEqual(2, ranks.Count);
 			Assert.AreEqual(Constancts.HandRanks.Pair, ranks[0].Hand.Rank);
 			Assert.AreEqual(Constancts.HandRanks.Pair, ranks[1].Hand.Rank);
-			Assert.AreEqual(7, ranks[0].Hand.CardsInTheHand[0].Value);
-			Assert.AreEqual(14, ranks[0].Hand.CardsInTheHand[2].Value);
-			Assert.AreEqual(7, ranks[1].Hand.CardsInTheHand[0].Value);
-			Assert.AreEqual(13, ranks[1].Hand.CardsInTheHand[2].Value);
+			Assert.AreEqual<int>(7, ranks[0].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(14, ranks[0].Hand.CardsInTheHand[2].Value);
+			Assert.AreEqual<int>(7, ranks[1].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(13, ranks[1].Hand.CardsInTheHand[2].Value);
 		}
 
 		[TestMethod]
@@ -227,7 +227,7 @@ namespace Poker.Tests
 			Assert.AreEqual(1, ranks.Count);
 			Assert.AreEqual(3, ranks[0].Players.Count);
 			Assert.AreEqual(Constancts.HandRanks.Flush, ranks[0].Hand.Rank);
-			Assert.AreEqual(10, ranks[0].Hand.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(10, ranks[0].Hand.CardsInTheHand[0].Value);
 		}
 
 		[TestMethod]

@@ -31,9 +31,9 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(twoPairs);
 			Assert.AreEqual(5, twoPairs.CardsInTheHand.Count);
-			Assert.AreEqual(3, twoPairs.CardsInTheHand[0].Value);
-			Assert.AreEqual(2, twoPairs.CardsInTheHand[2].Value);
-			Assert.AreEqual(14, twoPairs.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(3, twoPairs.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(2, twoPairs.CardsInTheHand[2].Value);
+			Assert.AreEqual<int>(14, twoPairs.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.TwoPairs, twoPairs.Rank);
 		}
 

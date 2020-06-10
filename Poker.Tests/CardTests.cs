@@ -19,7 +19,7 @@ namespace Poker.Tests
 			//Act
 
 			//Assert
-			Assert.AreEqual(14, card.Value);
+			Assert.AreEqual<int>(14, card.Value);
 			Assert.AreEqual("❤A", card.ToString());
 		}
 
@@ -32,7 +32,7 @@ namespace Poker.Tests
 			//Act
 
 			//Assert
-			Assert.AreEqual(14, card.Value);
+			Assert.AreEqual<int>(14, card.Value);
 			Assert.AreEqual("♣A", card.ToString());
 		}
 
@@ -45,7 +45,7 @@ namespace Poker.Tests
 			//Act
 
 			//Assert
-			Assert.AreEqual(1, card.Value);
+			Assert.AreEqual<int>(1, card.Value);
 			Assert.AreEqual("♠A", card.ToString());
 		}
 
@@ -53,14 +53,84 @@ namespace Poker.Tests
 		public void CardAceFromSymbol()
 		{
 			//Arrange
-			Card card = Card.FromSymbol("♠A");
+			Card card = Card.FromSuitAndValue("♠A");
 
 			//Act
 
 			//Assert
-			Assert.AreEqual(14, card.Value);
+			Assert.AreEqual<int>(14, card.Value);
 			Assert.AreEqual(Suits.Spades, card.Suit);
-			Assert.AreEqual("♠A", card.ToString());
+			Assert.AreEqual<string>("♠A", card);
+		}
+
+		[TestMethod]
+		public void CardJacksFromString()
+		{
+			//Arrange
+			Card card = "♦J";
+
+			//Act
+
+			//Assert
+			Assert.AreEqual<int>(11, card.Value);
+			Assert.AreEqual(Suits.Dimensions, card.Suit);
+			Assert.AreEqual<string>("♦J", card);
+		}
+
+		[TestMethod]
+		public void CardAreSame()
+		{
+			//Arrange
+			Card card1 = "♦J";
+			Card card2 = "♦J";
+
+			//Act
+			bool areSame = card1 == card2;
+
+			//Assert
+			Assert.IsTrue(areSame);
+		}
+
+		[TestMethod]
+		public void CardAreNotSame()
+		{
+			//Arrange
+			Card card1 = "♦J";
+			Card card2 = "❤J";
+
+			//Act
+			bool areNotSame = card1 != card2;
+
+			//Assert
+			Assert.IsTrue(areNotSame);
+		}
+
+		[TestMethod]
+		public void CardAreNotSameByValue()
+		{
+			//Arrange
+			Card card1 = "❤J";
+			Card card2 = "❤T";
+
+			//Act
+			bool areNotSame = card1 != card2;
+
+			//Assert
+			Assert.IsTrue(areNotSame);
+		}
+
+		[TestMethod]
+		public void CardIsInvalueByValue()
+		{
+			//Arrange
+			Assert.ThrowsException<ArgumentOutOfRangeException>(() => { Card card1 = "❤X"; });
+		}
+
+		[TestMethod]
+		public void CardIsInvalueBySuits()
+		{
+			//Arrange
+			Assert.ThrowsException<ArgumentOutOfRangeException>(() => { Card card1 = "#T"; });
 		}
 	}
 }

@@ -49,8 +49,8 @@ namespace Poker.Tests
 			Assert.AreEqual(2, texasGame.Players[1].Cards.Count);
 			Assert.AreEqual(48, texasGame.Deck.Cards.Count);
 			Player player = texasGame.Players[0];
-			Assert.AreEqual(14, player.Cards[0].Value);
-			Assert.AreEqual(14, player.Cards[1].Value);
+			Assert.AreEqual<int>(14, player.Cards[0].Value);
+			Assert.AreEqual<int>(14, player.Cards[1].Value);
 		}
 
 		[TestMethod]

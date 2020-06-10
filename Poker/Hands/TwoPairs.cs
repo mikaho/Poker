@@ -39,8 +39,8 @@ namespace Poker.Hands
 
 		public override void SetHandName()
 		{
-			string highPair = HandNameHelper.CardName(CardsInTheHand.First());
-			string lowPair = HandNameHelper.CardName(CardsInTheHand.Skip(2).First());
+			string highPair = CardsInTheHand.First().Value.ValueName();
+			string lowPair = CardsInTheHand.Skip(2).First().Value.ValueName();
 			HandName = $"Kaksi paria - {highPair} ja {lowPair}";
 		}
 	}

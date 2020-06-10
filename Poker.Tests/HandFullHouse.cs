@@ -31,8 +31,8 @@ namespace Poker.Tests
 			//Assert
 			Assert.IsNotNull(fullHouse);
 			Assert.AreEqual(5, fullHouse.CardsInTheHand.Count);
-			Assert.AreEqual(3, fullHouse.CardsInTheHand[0].Value);
-			Assert.AreEqual(14, fullHouse.CardsInTheHand[4].Value);
+			Assert.AreEqual<int>(3, fullHouse.CardsInTheHand[0].Value);
+			Assert.AreEqual<int>(14, fullHouse.CardsInTheHand[4].Value);
 			Assert.AreEqual(Constancts.HandRanks.FullHouse, fullHouse.Rank);
 		}
 
