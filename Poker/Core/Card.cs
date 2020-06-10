@@ -20,7 +20,7 @@ namespace Poker.Core
 		private static void ThrowIfValueOutOfRange(CardValue value)
 		{
 			if (!(value >= 1 && value <= 14))
-				throw new ArgumentOutOfRangeException("Card value");
+				throw new ArgumentOutOfRangeException(nameof(value));
 		}
 
 		public Card(Suits suit, string value)
@@ -62,17 +62,17 @@ namespace Poker.Core
 		public static Card FromSuitAndValue(string suitAndValue)
 		{
 			if (string.IsNullOrEmpty(suitAndValue))
-				throw new ArgumentNullException("suitAndValue");
+				throw new ArgumentNullException(nameof(suitAndValue));
 
 			if (suitAndValue.Length != 2)
-				throw new ArgumentNullException("suitAndValue");
+				throw new ArgumentNullException(nameof(suitAndValue));
 
 			string suitsInString = suitAndValue.Substring(0, 1);
 			string valueInString = suitAndValue.Substring(1, 1);
 
 			Suits suit = Suits.GetAll<Suits>().FirstOrDefault(s => s.Symbol == suitsInString);
 			if (suit == null)
-				throw new ArgumentOutOfRangeException("suit");
+				throw new ArgumentOutOfRangeException(nameof(suitAndValue));
 			CardValue value = valueInString;
 			
 			return new Card(suit, value);

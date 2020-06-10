@@ -28,7 +28,7 @@ namespace Poker.Hands
 
 		public override void SetHandName()
 		{
-			string cardName = HandNameHelper.HighCardName(CardsInTheHand.First());
+			string cardName = CardsInTheHand.First().Value.ValueName();
 			HandName = $"Hai - Korkea kortti {cardName}";
 		}
 	}

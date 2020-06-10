@@ -8,37 +8,47 @@ namespace Poker.Core
 {
 	public class CardValue : ValueObject<CardValue>, ICloneable, IComparable<CardValue>
 	{
-		private readonly int value;
+		public readonly int Value;
 		private CardValue(int value)
 		{
-			this.value = value;
+			Value = value;
 		}
 
-		private static string ValueToString(int value)
+		public object Clone()
 		{
-			switch (value)
-			{
-				case 10:
-					return "T";
-				case 11:
-					return "J";
-				case 12:
-					return "Q";
-				case 13:
-					return "K";
-				case 14:
-				case 1:
-					return "A";
-				default:
-					return value.ToString();
-			}
+			return new CardValue(Value);
+		}
+
+		protected override bool EqualsCore(CardValue other)
+		{
+			return Value == other.Value;
+		}
+
+		protected override int GetHashCodeCore()
+		{
+			return Value.GetHashCode();
+		}
+
+		public static implicit operator CardValue(int value)
+		{
+			return new CardValue(value);
+		}
+
+		public int CompareTo([NotNull]CardValue otherCard)
+		{
+			return Value.CompareTo(otherCard.Value);
+		}
+
+		public static implicit operator CardValue(string value)
+		{
+			return new CardValue(StringToValue(value));
 		}
 
 		private static int StringToValue(string stringValue)
 		{
 			int numericValue = 0;
 			if (stringValue.Length != 1)
-				return numericValue;
+				throw new ArgumentOutOfRangeException(nameof(stringValue));
 
 			switch (stringValue)
 			{
@@ -59,98 +69,33 @@ namespace Poker.Core
 					break;
 				default:
 					if (!int.TryParse(stringValue, out numericValue))
-						throw new ArgumentOutOfRangeException("Card value");
+						throw new ArgumentOutOfRangeException(nameof(stringValue));
 					break;
 			}
 
 			return numericValue;
 		}
 
-		public string ValueName()
-		{
-			switch (value)
-			{
-				case 2:
-					return "Kakkoset";
-				case 3:
-					return "Kolmeset";
-				case 4:
-					return "Neloset";
-				case 5:
-					return "Vitoset";
-				case 6:
-					return "Kutoset";
-				case 7:
-					return "Seiskat";
-				case 8:
-					return "Kasit";
-				case 9:
-					return "Ysit";
-				case 10:
-					return "Kympit";
-				case 11:
-					return "Järkät";
-				case 12:
-					return "Akat";
-				case 13:
-					return "Kurkot";
-				case 14:
-					return "Ässät";
-				default:
-					throw new ArgumentOutOfRangeException($"Invalid value {value}");
-			}
-		}
-
-		public object Clone()
-		{
-			return new CardValue(value);
-		}
-
-		protected override bool EqualsCore(CardValue other)
-		{
-			return value == other.value;
-		}
-
-		protected override int GetHashCodeCore()
-		{
-			return value.GetHashCode();
-		}
-
-		public static implicit operator CardValue(int value)
-		{
-			return new CardValue(value);
-		}
-
-		public int CompareTo([NotNull]CardValue otherCard)
-		{
-			return value.CompareTo(otherCard.value);
-		}
-
-		public static implicit operator CardValue(string value)
-		{
-			return new CardValue(StringToValue(value));
-		}
-
 		public static bool operator == (CardValue a, CardValue b)
-			=> a.value == b.value;
+			=> a.Value == b.Value;
 
 		public static bool operator !=(CardValue a, CardValue b)
-			=> a.value != b.value;
+			=> a.Value != b.Value;
 
 		public static bool operator >=(CardValue a, CardValue b)
-			=> a.value >= b.value;
+			=> a.Value >= b.Value;
 
 		public static bool operator <=(CardValue a, CardValue b)
-			=> a.value <= b.value;
+			=> a.Value <= b.Value;
 
 		public static int operator +(CardValue a, int toAdd)
-			=> a.value + toAdd;
+			=> a.Value + toAdd;
 
-		public static implicit operator int(CardValue c) => c.value;
+		public static implicit operator int(CardValue c) => c.Value;
 		
 		public override string ToString()
 		{
-			return ValueToString(value);
+			return this.ValueToString();
 		}
 
 		public override bool Equals(object obj)

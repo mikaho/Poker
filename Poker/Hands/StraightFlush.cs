@@ -14,7 +14,6 @@ namespace Poker.Hands
 		{
 		}
 
-
 		public override Maybe<Hand> IsMatch(IEnumerable<Card> cards)
 		{
 			ThrowIfDuplicate(cards);
@@ -36,7 +35,7 @@ namespace Poker.Hands
 
 		public override void SetHandName()
 		{
-			string cardName = HandNameHelper.HighCardName(CardsInTheHand.First());
+			string cardName = CardsInTheHand.First().Value.ValueName();
 			HandName = $"Värisuora - Korkea kortti {cardName}";
 		}
 
